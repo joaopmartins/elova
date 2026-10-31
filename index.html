@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>ELOVA Condomínios</title>
+<title>ELLUM8 Condomínios</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Administração de condomínios no Porto e em Vila Nova de Gaia. Site de demonstração.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,6 +274,19 @@ fieldset[aria-invalid="true"] .chip{border-color:var(--neg)}
 .form-msg.err{color:var(--neg)}
 [data-version="b"] .mode{border-radius:8px}
 @media (max-width: 520px){ .q-row{grid-template-columns:1fr} .mode{flex-direction:column} }
+
+/* Símbolo ELLUM8 e algarismos alinhados no nome */
+.nm,.brand,.bb-logo .w,.plaque h1,.sig .wm{font-variant-numeric:lining-nums}
+.mark{display:block;color:var(--plaque-gold);line-height:0}
+.mark svg{width:clamp(96px,12vw,132px);height:auto}
+[data-version="b"] .mark{color:var(--on-band)}
+[data-version="b"] .plaque .mark{justify-self:start}
+.bb-logo .mk{display:block;line-height:0}
+.bb-logo .mk svg{width:72px;height:auto}
+.wrong .bb-logo .mk svg{width:40px}
+.logo-pos .mk{color:var(--accent)}
+.logo-neg .mk{color:var(--plaque-gold)}
+[data-version="b"] .logo-neg .mk{color:var(--on-band)}
 /* Patrimonio teaser (linha de serviço futura) */
 .future{background:var(--band);color:var(--on-band)}
 .future .wrap{padding-block:56px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between}
@@ -470,7 +483,7 @@ footer a:hover{color:var(--on-band)}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand nm" href="#inicio">ELOVA</a>
+    <a class="brand nm" href="#inicio">ELLUM8</a>
     <nav class="nav" id="nav-main" aria-label="Principal">
       <a href="#servicos" data-i18n="nav1">Serviços</a>
       <a href="#honorarios" data-i18n="nav6">Honorários</a>
@@ -493,7 +506,8 @@ footer a:hover{color:var(--on-band)}
   <section class="hero">
     <div class="wrap">
       <div class="plaque">
-        <h1 class="nm">ELOVA</h1>
+        <span class="mark" aria-hidden="true"></span>
+        <h1 class="nm">ELLUM8</h1>
         <p class="sub" data-i18n="sub">Administração de Condomínios</p>
         <div class="rule" aria-hidden="true"></div>
         <p class="motto" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
@@ -707,7 +721,7 @@ footer a:hover{color:var(--on-band)}
           <details><summary data-i18n="fq5">Em que línguas trabalham?</summary><p data-i18n="fa5">Em português e em inglês: atendimento, relatórios e assembleias. Quem não puder estar presente pode participar nas assembleias por videoconferência.</p></details>
           <details><summary data-i18n="fq6">O que é o fundo comum de reserva?</summary><p data-i18n="fa6">É o dinheiro guardado para obras de conservação das partes comuns. Cada condómino contribui com pelo menos 10% da sua quota. Mantemo-lo numa conta própria e o saldo aparece em todos os relatórios.</p></details>
           <details><summary data-i18n="fq7">Há apoio fora do horário de expediente?</summary><p data-i18n="fa7">Sim, temos uma linha de urgências disponível fora do horário. Contactamos de imediato o parceiro adequado e informamos os condóminos do que foi feito.</p></details>
-          <details><summary data-i18n="fq8">Fazem também gestão de imóveis?</summary><p data-i18n="fa8">Sim, também é possível. Gerimos imóveis de proprietários, do arrendamento à manutenção, numa área que vai ter marca própria: <span class="nm">ELOVA</span> Património.</p></details>
+          <details><summary data-i18n="fq8">Fazem também gestão de imóveis?</summary><p data-i18n="fa8">Sim, também é possível. Gerimos imóveis de proprietários, do arrendamento à manutenção, numa área que vai ter marca própria: <span class="nm">ELLUM8</span> Património.</p></details>
         </div>
       </div>
     </div>
@@ -715,7 +729,7 @@ footer a:hover{color:var(--on-band)}
 
   <section class="future" data-linha="patrimonio" hidden>
     <div class="wrap">
-      <h2><span class="nm">ELOVA</span> Património</h2>
+      <h2><span class="nm">ELLUM8</span> Património</h2>
       <p data-i18n="futP">Gestão de imóveis para proprietários que preferem delegar o dia a dia: arrendamento, manutenção, impostos e contas, com o mesmo relatório mensal.</p>
     </div>
   </section>
@@ -819,7 +833,7 @@ footer a:hover{color:var(--on-band)}
             <div><dt data-i18n="dAddr">Escritório</dt><dd>Rua do Exemplo, 100, 4150-000 Porto<span class="ex" data-i18n="ex">exemplo</span></dd></div>
             <div><dt data-i18n="dPhone">Telefone</dt><dd>+351 220 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
             <div><dt data-i18n="dUrg">Urgências</dt><dd>+351 910 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-            <div><dt>Email</dt><dd>geral@<span class="nm-lower">elova</span>.exemplo<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+            <div><dt>Email</dt><dd>geral@<span class="nm-lower">ellum8</span>.exemplo<span class="ex" data-i18n="ex">exemplo</span></dd></div>
             <div><dt data-i18n="dHours">Horário</dt><dd data-i18n="hours">Dias úteis, das 9h00 às 18h30</dd></div>
           </dl>
         </div>
@@ -831,19 +845,19 @@ footer a:hover{color:var(--on-band)}
 <footer>
   <div class="wrap">
     <div style="display:grid;gap:10px">
-      <a class="brand nm" href="#inicio">ELOVA</a>
+      <a class="brand nm" href="#inicio">ELLUM8</a>
       <p class="motto" style="font-size:20px;color:var(--on-band-muted)" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
     </div>
     <ul>
-      <li><span class="nm">ELOVA</span> <span data-i18n="lineC">Condomínios</span></li>
-      <li data-linha="patrimonio" hidden><span class="nm">ELOVA</span> <span data-i18n="lineP">Património</span></li>
+      <li><span class="nm">ELLUM8</span> <span data-i18n="lineC">Condomínios</span></li>
+      <li data-linha="patrimonio" hidden><span class="nm">ELLUM8</span> <span data-i18n="lineP">Património</span></li>
       <li>Porto · Vila Nova de Gaia</li>
     </ul>
     <ul>
       <li><a href="#contacto" data-i18n="privacy">Política de privacidade</a></li>
       <li><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener" data-i18n="complaints">Livro de Reclamações</a></li>
     </ul>
-    <p class="foot-note"><span class="nm">ELOVA</span>, Lda. · NIF 500 000 000 · <span data-i18n="footNote">Site de demonstração. Contactos, moradas e números são fictícios.</span></p>
+    <p class="foot-note"><span class="nm">ELLUM8</span>, Lda. · NIF 500 000 000 · <span data-i18n="footNote">Site de demonstração. Contactos, moradas e números são fictícios.</span></p>
   </div>
 </footer>
 
@@ -861,10 +875,14 @@ footer a:hover{color:var(--on-band)}
 /* ===== Configuração =====
    Troque aqui o nome e ligue a linha de serviço "Património" quando existir. */
 const CONFIG = {
-  nome: "ELOVA",
-  alternativas: ["CONDIGNO", "ELOVA", "VELIA"],
+  nome: "ELLUM8",
+  alternativas: ["ELLUM8", "CONDIGNO", "ELOVA", "VELIA"],
   linhas: { condominios: true, patrimonio: false }
 };
+
+// Símbolo usado com o nome ELLUM8: o infinito (o 8 deitado) com um edifício a nascer do centro.
+const MARK = '<svg viewBox="0 0 120 76" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="3.4" d="M60 57C46 40 16 40 16 57s30 17 44 0 44-17 44 0-30 17-44 0"/><path stroke-width="3" d="M53 49V27M60 50V8M67 49V19"/><path stroke-width="1.8" d="M56.5 49V20M63.5 49V14"/></svg>';
+const hasMark = () => nome === "ELLUM8";
 
 const EN = {
   formOkQ:"Thank you. We will reply the next working day. This is a demo, so nothing was sent.",
@@ -1036,6 +1054,7 @@ function t(k){
 
 function applyName(){
   document.querySelectorAll(".nm").forEach(el => el.textContent = nome);
+  document.querySelectorAll(".mark").forEach(el => { el.innerHTML = hasMark() ? MARK : ""; el.hidden = !hasMark(); });
   document.querySelectorAll(".nm-lower").forEach(el => el.textContent = nome.toLowerCase());
   document.title = nome + (lang === "en" ? " Condominium Management" : " Condomínios");
   document.querySelectorAll("[data-nome]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.nome === nome)));
@@ -1117,6 +1136,9 @@ form.addEventListener("submit", e => {
 
 // ===== Manual de identidade =====
 const NAMES = {
+  ELLUM8:{orig:"De <em>elo</em> e do número 8, que deitado é o símbolo do infinito.",
+    ideia:"O elo liga condóminos, parceiros e edifício; o 8 diz que esse cuidado é contínuo e não termina no fim de cada assembleia. O símbolo junta o infinito a um edifício que nasce do centro.",
+    nota:"O número no nome tem duas questões práticas: como se diz ao telefone (\"Ellum oito\" ou \"Ellum eight\") e como se escreve num email. Convém registar também o domínio com o número por extenso."},
   CONDIGNO:{orig:"Do português <em>condigno</em>: adequado, à altura, merecido.",
     ideia:"Uma administração à altura do edifício e de quem lá vive. Começa por CON, como condomínio, e é uma palavra que existe, o que lhe dá peso e seriedade.",
     nota:"É uma palavra pouco usada no dia a dia, por isso pode precisar de ser explicada uma vez."},
@@ -1168,7 +1190,7 @@ function cmyk(h){ const [r,g,b]=hexRgb(h).map(v=>v/255); const k=1-Math.max(r,g,
 function verdict(r){ if(r>=7) return '<span class="pill ok">AAA, qualquer texto</span>'; if(r>=4.5) return '<span class="pill ok">AA, qualquer texto</span>'; if(r>=3) return '<span class="pill mid">Só títulos grandes e gráficos</span>'; return '<span class="pill bad">Só decoração</span>'; }
 const fmt = n => n.toFixed(2).replace(".", ",");
 
-function logo(cls, d){ return `<div class="bb-logo ${cls}"><span class="w">${nome}</span><span class="r"></span><span class="d">${d||"Administração de Condomínios"}</span></div>`; }
+function logo(cls, d){ return `<div class="bb-logo ${cls}">${hasMark() ? `<span class="mk">${MARK}</span>` : ""}<span class="w">${nome}</span><span class="r"></span><span class="d">${d||"Administração de Condomínios"}</span></div>`; }
 
 function renderBrand(){
   const el = document.getElementById("identidade"); if (!el) return;
@@ -1183,7 +1205,7 @@ function renderBrand(){
       <div><dt>A ter em conta</dt><dd>${N.nota}</dd></div>
     </dl>`);
 
-  const logoSec = sec("2. Logótipo", "Logótipo tipográfico: o nome, um filete e o descritor. Os monogramas das propostas iniciais podem juntar-se mais tarde.", `
+  const logoSec = sec("2. Logótipo", hasMark() ? "Símbolo e nome: o infinito, que é também o 8 do nome, com um edifício a nascer do centro. Em fundo verde, tudo a dourado." : "Logótipo tipográfico: o nome, um filete e o descritor. Os monogramas das propostas iniciais podem juntar-se mais tarde.", `
     <div class="logo-row">
       <div><div class="logo-tile on-light">${logo("logo-pos")}</div><p class="cap">Versão positiva, sobre fundos claros.</p></div>
       <div><div class="logo-tile on-dark">${logo("logo-neg")}</div><p class="cap">Versão negativa, sobre fundos escuros.</p></div>
