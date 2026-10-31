@@ -1,0 +1,1289 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ELOVA Condomínios</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Administração de condomínios no Porto e em Vila Nova de Gaia. Site de demonstração.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600&family=Schibsted+Grotesk:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Tema único claro, por opção: site de marca com identidade fixa; as faixas verdes são os momentos escuros.
+   Layout: brass-plaque hero on deep green, then ivory "ledger" sections with a narrow label column and a content column. */
+:root{
+  --bg:#F5F1E8;          /* marfim */
+  --surface:#FBF9F4;
+  --fg:#24282B;          /* antracite */
+  --muted:#5A605D;
+  --line:#DCD4C3;
+  --accent:#B8955A;      /* dourado, linhas e detalhes */
+  --accent-text:#7A5C28; /* dourado escuro, texto sobre marfim */
+  --band:#1D3A2E;        /* verde profundo */
+  --band-2:#244738;
+  --on-band:#F2EDE1;
+  --on-band-muted:#B9C4BC;
+  --plaque-gold:#CBAA6D;
+  --neg:#8C3B2E;
+  --display:"Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --body:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+}
+
+/* ===== Versão B: identidade proposta sem paleta dada =====
+   Granito do Porto e azul do Douro. Grotesca contemporânea nos títulos, humanista no texto. */
+:root[data-version="b"]{
+  --bg:#EEEDE9; --surface:#FFFFFF; --fg:#1C2329; --muted:#55606A; --line:#D5D5CF;
+  --accent:#2F5F8F; --accent-text:#24507C; --band:#1E2A35; --band-2:#283A4A;
+  --on-band:#F3F2EE; --on-band-muted:#AEB9C4; --plaque-gold:#E9E4D8; --neg:#A23B2A;
+  --display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top, 0px))}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--band)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.12;text-wrap:balance;margin:0}
+h2{font-size:clamp(32px,4.4vw,46px);letter-spacing:.005em}
+h3{font-size:24px}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.label{font-family:var(--body);font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text)}
+.demo-note{display:inline-block;font-size:12.5px;color:var(--muted);border:1px dashed var(--line);padding:2px 8px;border-radius:3px}
+.nm{white-space:nowrap}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--band);color:var(--on-band);border-bottom:1px solid rgba(203,170,109,.22)}
+.top .wrap{display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.2em;text-decoration:none;color:var(--plaque-gold)}
+.nav{display:flex;gap:22px;margin-left:auto;font-size:15px}
+.nav a{text-decoration:none;color:var(--on-band-muted)}
+.nav a:hover{color:var(--on-band)}
+.lang{display:flex;border:1px solid rgba(242,237,225,.3);border-radius:3px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--on-band-muted);font:600 12.5px var(--body);letter-spacing:.1em;padding:6px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--on-band);color:var(--band)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px var(--body);padding:12px 20px;border-radius:3px;text-decoration:none;cursor:pointer;border:1px solid transparent}
+.btn-gold{background:var(--plaque-gold);color:#1B2A22}
+.btn-gold:hover{filter:brightness(1.06)}
+.btn-line{border-color:rgba(242,237,225,.45);color:var(--on-band)}
+.btn-line:hover{border-color:var(--on-band)}
+.top .btn{padding:9px 16px;font-size:14px}
+.nav-cta,.menu-btn{display:none}
+@media (max-width: 920px){
+  .top .wrap{gap:12px}
+  .lang{margin-left:auto}
+  .lang button{padding:10px 12px}
+  .menu-btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 12px;background:none;border:1px solid rgba(242,237,225,.3);border-radius:3px;color:var(--on-band);font:600 14px var(--body);cursor:pointer}
+  .menu-ico{width:16px;height:10px;border-block:1.5px solid currentColor;position:relative}
+  .menu-ico::after{content:"";position:absolute;left:0;right:0;top:50%;border-top:1.5px solid currentColor;transform:translateY(-50%)}
+  .nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;background:var(--band);border-bottom:1px solid rgba(242,237,225,.15);padding:4px var(--gutter-r) 16px var(--gutter-l);box-shadow:0 20px 30px -20px rgba(0,0,0,.5)}
+  .top.open .nav{display:flex}
+  .nav a{padding:14px 0;font-size:17px;color:var(--on-band);border-top:1px solid rgba(242,237,225,.12)}
+  .nav a:first-child{border-top:0}
+  .nav-cta{display:block;color:var(--plaque-gold) !important;font-weight:600}
+}
+@media (max-width: 520px){ .top .btn{display:none} .menu-btn span:last-child{display:none} .menu-btn{padding:8px 10px} }
+
+/* Hero */
+.hero{background:var(--band);color:var(--on-band);background-image:radial-gradient(ellipse 80% 60% at 50% 0%, var(--band-2), transparent 70%)}
+.hero .wrap{padding-block:56px 64px;display:grid;justify-items:center;text-align:center;gap:36px}
+.plaque{border:1px solid rgba(203,170,109,.55);outline:1px solid rgba(203,170,109,.18);outline-offset:6px;padding:44px clamp(20px,6vw,72px) 40px;display:grid;justify-items:center;gap:14px;max-width:100%}
+.plaque h1{font-size:clamp(46px,9vw,92px);font-weight:500;letter-spacing:.16em;margin-right:-.16em;color:var(--plaque-gold);line-height:1}
+.plaque .sub{font-size:clamp(11px,1.6vw,14px);font-weight:500;letter-spacing:.3em;margin-right:-.3em;text-transform:uppercase;color:var(--on-band)}
+.rule{width:56px;height:1px;background:var(--plaque-gold);margin:8px 0}
+.motto{font-family:var(--display);font-style:italic;font-size:clamp(22px,2.8vw,28px);line-height:1.3;color:var(--on-band)}
+.hero-intro{max-width:620px;color:var(--on-band-muted);font-size:18px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.hero-place{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--on-band-muted)}
+
+/* Commitments */
+.commit{border-bottom:1px solid var(--line);background:var(--surface)}
+.commit .wrap{padding-block:44px}
+.commit-head{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;justify-content:space-between;margin-bottom:24px}
+.commit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.commit-grid > div{border-top:1px solid var(--accent);padding-top:16px;display:grid;gap:8px;align-content:start}
+.commit-grid h3{font-size:22px}
+.commit-grid p{color:var(--muted);font-size:15.5px}
+@media (max-width: 900px){ .commit-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width: 520px){ .commit-grid{grid-template-columns:1fr} }
+
+/* Sections */
+section.sec{border-bottom:1px solid var(--line)}
+section.sec > .wrap{padding-block:88px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:40px 56px}
+.sec-head{display:grid;gap:14px;align-content:start}
+.sec-head p{color:var(--muted)}
+.sec-body{min-width:0;display:grid;gap:28px;align-content:start}
+.prose{display:grid;gap:16px;max-width:64ch}
+@media (max-width: 860px){ section.sec > .wrap{grid-template-columns:1fr;padding-block:64px;gap:28px} }
+
+/* About */
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:0;border-block:1px solid var(--line);padding-block:20px}
+.facts div{display:grid;gap:2px}
+.facts dt{font-family:var(--display);font-size:34px;font-weight:600;color:var(--accent-text);line-height:1.1;font-variant-numeric:tabular-nums}
+.facts dd{margin:0;color:var(--muted);font-size:15px}
+.partners{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.partner{display:flex;gap:16px;align-items:center}
+.avatar{flex:none;width:64px;height:64px;border-radius:50%;border:1px dashed var(--accent);display:grid;place-items:center;font-family:var(--display);font-size:22px;color:var(--accent-text)}
+.partner strong{display:block;font-weight:600}
+.partner span{color:var(--muted);font-size:15px}
+@media (max-width: 620px){ .facts{grid-template-columns:1fr} .partners{grid-template-columns:1fr} }
+
+/* Services */
+.services{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.services > li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px 32px;padding-block:24px;border-bottom:1px solid var(--line)}
+.services ul{margin:0;padding-left:18px;color:var(--muted);display:grid;gap:4px}
+.services ul li::marker{color:var(--accent)}
+@media (max-width: 620px){ .services > li{grid-template-columns:1fr} }
+
+/* Fees */
+.fees{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.fee-factors{display:grid;gap:10px;align-content:start;border-top:1px solid var(--accent);padding-top:16px}
+.fee-factors h3{font-size:22px}
+.fee-factors ul{margin:0;padding-left:18px;display:grid;gap:5px;color:var(--muted)}
+.fee-factors li::marker{color:var(--accent)}
+.fee-cta{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);padding:22px 24px}
+.fee-cta p{color:var(--muted);max-width:62ch;flex:1 1 320px}
+[data-version="b"] .fee-cta{border-radius:8px}
+[data-version="b"] .fee-factors{border-top:3px solid var(--accent)}
+@media (max-width: 760px){ .fees{grid-template-columns:1fr} }
+
+/* Tiers */
+.wide{grid-template-columns:1fr !important}
+.wide .sec-head{max-width:720px}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.tier{border:1px solid var(--line);background:var(--surface);padding:28px 24px;display:grid;grid-template-rows:auto auto auto 1fr;gap:12px}
+.tier-mid{border-top:3px solid var(--band)}
+.tier-for{color:var(--muted);font-size:15.5px}
+.price{border-block:1px solid var(--line);padding-block:12px;color:var(--muted);font-size:14.5px}
+.price b{font-family:var(--display);font-size:34px;font-weight:600;color:var(--accent-text);margin-right:4px}
+.tier ul{margin:0;padding-left:18px;display:grid;gap:6px;align-content:start;font-size:15.5px}
+.tier ul li::marker{color:var(--accent)}
+.tier-custom{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;border:1px solid var(--line);padding:22px 24px}
+.tier-custom > div{display:grid;gap:4px;min-width:0;flex:1 1 320px}
+.tier-custom p{color:var(--muted);font-size:15.5px}
+@media (max-width: 860px){ .tiers{grid-template-columns:1fr} }
+
+/* Values + report */
+.transp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:32px;align-items:start}
+.transp .prose h3{font-size:30px}
+.value-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;border-top:1px solid var(--line);padding-top:28px}
+.value-list > div{display:grid;gap:8px;align-content:start}
+.value-list p{color:var(--muted);font-size:15.5px}
+@media (max-width: 980px){ .transp{grid-template-columns:1fr} }
+@media (max-width: 680px){ .value-list{grid-template-columns:1fr} }
+
+.report{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--band);font-size:14.5px;box-shadow:0 18px 40px -28px rgba(20,35,28,.45)}
+.report-head{padding:18px 20px 14px;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.report-head .row1{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.report-head strong{font-family:var(--display);font-size:22px;font-weight:600}
+.report-head span{color:var(--muted)}
+.tag{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text);border:1px solid var(--accent);padding:1px 7px;border-radius:2px;white-space:nowrap}
+.report table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.report th{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;padding:14px 20px 6px}
+.report td{padding:5px 20px;border-top:1px solid color-mix(in srgb, var(--line) 60%, transparent)}
+.report td:last-child{text-align:right;white-space:nowrap}
+.report tr.total td{font-weight:600;border-top:1px solid var(--line)}
+.report .neg{color:var(--neg)}
+.report-foot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.report-foot div{background:var(--surface);padding:12px 20px;display:grid;gap:2px}
+.report-foot b{font-variant-numeric:tabular-nums;font-size:16px}
+.report-foot small{color:var(--muted);font-size:12.5px}
+.report-notes{padding:12px 20px 16px;display:grid;gap:4px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+
+/* Steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:step}
+.steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 16px;padding-block:20px;border-top:1px solid var(--line)}
+.steps li::before{counter-increment:step;content:counter(step);grid-row:span 2;font-family:var(--display);font-size:40px;line-height:1;color:var(--accent-text)}
+.steps p{color:var(--muted)}
+
+/* Zone */
+.cities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.city{border-top:1px solid var(--accent);padding-top:18px;display:grid;gap:10px;align-content:start}
+.city h3{font-size:clamp(30px,3.6vw,40px);font-weight:500;letter-spacing:.02em}
+.city p{color:var(--muted);line-height:1.9}
+.zone-more{color:var(--muted)}
+.zone-more::before{content:"";display:inline-block;width:24px;height:1px;background:var(--accent);vertical-align:middle;margin-right:12px}
+@media (max-width: 620px){ .cities{grid-template-columns:1fr} }
+
+/* Testimonials */
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.quote{margin:0;border-top:1px solid var(--accent);padding-top:20px;display:grid;gap:14px;align-content:start;justify-items:start}
+.quote blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:23px;line-height:1.35;color:var(--fg)}
+.quote figcaption{font-size:14.5px;color:var(--muted)}
+@media (max-width: 680px){ .quotes{grid-template-columns:1fr} }
+
+/* FAQ */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:18px 36px 18px 0;position:relative;font-weight:600;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--display);font-size:30px;font-weight:500;color:var(--accent-text);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:64ch}
+@media (prefers-reduced-motion: reduce){ .faq summary::after{transition:none} }
+
+/* Contact */
+.contact{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:40px;align-items:start}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{display:grid;gap:6px}
+.field.full,form > .full{grid-column:1 / -1}
+label{font-size:14px;font-weight:600}
+input,select,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:11px 12px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent-text);outline-offset:0;border-color:var(--accent-text)}
+textarea{min-height:120px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:400;color:var(--muted)}
+.check input{width:18px;height:18px;flex:none;margin-top:2px;accent-color:var(--band)}
+.form-actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn-band{background:var(--band);color:var(--on-band)}
+.btn-band:hover{background:var(--band-2)}
+.form-msg{font-size:14.5px;color:var(--accent-text);font-weight:600}
+.details{display:grid;gap:18px;border-top:1px solid var(--accent);padding-top:20px}
+.details div{display:grid;gap:2px}
+.details dt{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.details dd{margin:0;user-select:all}
+.ex{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:0 6px;border-radius:2px;margin-left:6px;user-select:none;white-space:nowrap}
+@media (max-width: 900px){ .contact{grid-template-columns:1fr} }
+@media (max-width: 520px){ form{grid-template-columns:1fr} }
+
+
+/* Form: mode, chips and optional block */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;font-size:14px;font-weight:600;margin-bottom:8px}
+.mode{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--surface)}
+.seg{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;font-weight:600;font-size:15px;cursor:pointer;color:var(--muted);position:relative}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg:has(input:checked){background:var(--band);color:var(--on-band)}
+.seg:has(input:focus-visible){outline:2px solid var(--accent-text);outline-offset:-4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-size:14.5px;font-weight:400;cursor:pointer;min-height:40px}
+.chip input{width:16px;height:16px;margin:0;accent-color:var(--band)}
+.chip:has(input:checked){border-color:var(--band);background:color-mix(in srgb, var(--band) 8%, var(--surface))}
+.more{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:18px}
+.more legend{float:left;width:100%;font-family:var(--display);font-size:22px;margin-bottom:4px}
+.more legend + *{clear:both}
+.opt{font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-left:6px}
+.q{display:grid;gap:8px}
+.q-l{font-size:14px;font-weight:600}
+.q-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+[aria-invalid="true"]{border-color:var(--neg) !important}
+fieldset[aria-invalid="true"] .chip{border-color:var(--neg)}
+.form-msg.err{color:var(--neg)}
+[data-version="b"] .mode{border-radius:8px}
+@media (max-width: 520px){ .q-row{grid-template-columns:1fr} .mode{flex-direction:column} }
+/* Patrimonio teaser (linha de serviço futura) */
+.future{background:var(--band);color:var(--on-band)}
+.future .wrap{padding-block:56px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between}
+.future h2{color:var(--plaque-gold);font-size:clamp(28px,3.6vw,38px)}
+.future p{color:var(--on-band-muted);max-width:56ch}
+
+/* Footer */
+footer{background:var(--band);color:var(--on-band-muted);font-size:14.5px}
+footer .wrap{padding-block:48px calc(88px + env(safe-area-inset-bottom, 0px));display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:28px}
+footer .brand{font-size:20px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{color:var(--on-band-muted)}
+footer a:hover{color:var(--on-band)}
+.foot-note{grid-column:1 / -1;border-top:1px solid rgba(242,237,225,.15);padding-top:20px;font-size:13px}
+@media (max-width: 760px){ footer .wrap{grid-template-columns:1fr} }
+
+/* Demo name switcher */
+.switcher{position:fixed;z-index:25;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:4px;box-shadow:0 10px 30px -12px rgba(0,0,0,.35);padding:8px 10px;display:flex;align-items:center;gap:8px;font-size:12.5px}
+.switcher .sw-label{color:var(--muted);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.switcher button{font:600 12.5px var(--body);letter-spacing:.1em;background:none;border:1px solid var(--line);color:var(--fg);padding:5px 8px;min-height:32px;min-width:32px;border-radius:3px;cursor:pointer}
+.switcher button[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+@media (max-width: 420px){ .switcher .sw-label{display:none} .sw-sep{display:none} }
+/* Versão B: ajustes de forma */
+[data-version="b"] h1,[data-version="b"] h2,[data-version="b"] h3{font-weight:600;letter-spacing:-.015em;line-height:1.08}
+[data-version="b"] h2{font-size:clamp(30px,4vw,42px)}
+[data-version="b"] h3{font-size:21px}
+[data-version="b"] .brand{font-weight:700;letter-spacing:.06em;color:var(--on-band)}
+[data-version="b"] .top{border-bottom-color:rgba(255,255,255,.08)}
+[data-version="b"] .btn{border-radius:6px}
+[data-version="b"] .btn-gold{background:var(--plaque-gold);color:#1C2329}
+[data-version="b"] .hero{background-image:none}
+[data-version="b"] .hero .wrap{justify-items:start;text-align:left;padding-block:72px 64px;gap:28px}
+[data-version="b"] .plaque{border:0;outline:0;padding:0;justify-items:start;gap:10px}
+[data-version="b"] .plaque h1{font-size:clamp(52px,10vw,104px);font-weight:700;letter-spacing:-.02em;margin-right:0;color:var(--on-band)}
+[data-version="b"] .plaque .sub{letter-spacing:.18em;margin-right:0;color:var(--on-band-muted)}
+[data-version="b"] .rule{width:40px;height:3px;background:var(--accent);margin:10px 0 6px}
+[data-version="b"] .motto{font-weight:500;font-size:clamp(22px,2.6vw,28px)}
+[data-version="b"] .hero-ctas{justify-content:flex-start}
+[data-version="b"] .label{color:var(--accent-text);letter-spacing:.12em}
+[data-version="b"] .commit-grid > div{border-top:3px solid var(--accent)}
+[data-version="b"] .commit-grid h3{font-size:19px}
+[data-version="b"] .tier,[data-version="b"] .tier-custom,[data-version="b"] .report{border-radius:8px;overflow:hidden}
+[data-version="b"] .tier-mid{border-top:4px solid var(--accent)}
+[data-version="b"] .report{border-top:4px solid var(--accent)}
+[data-version="b"] .price b{font-size:30px;font-weight:700;color:var(--fg)}
+[data-version="b"] .facts dt{font-weight:700;color:var(--fg)}
+[data-version="b"] .steps li::before{font-weight:700;font-size:32px;color:var(--accent-text)}
+[data-version="b"] .city h3{font-weight:600}
+[data-version="b"] .city,[data-version="b"] .quote,[data-version="b"] .details{border-top:3px solid var(--accent)}
+[data-version="b"] .quote blockquote{font-style:normal;font-weight:500;font-size:21px;letter-spacing:-.005em}
+[data-version="b"] .tag{border-radius:999px}
+[data-version="b"] input,[data-version="b"] select,[data-version="b"] textarea{border-radius:6px}
+[data-version="b"] .faq summary::after{font-family:var(--body);font-weight:400;font-size:26px}
+[data-version="b"] .future h2{color:var(--on-band)}
+
+/* Painel de demonstração */
+.switcher{flex-wrap:wrap;max-width:calc(100vw - 32px);row-gap:6px}
+.sw-group{display:flex;align-items:center;gap:6px}
+.sw-sep{width:1px;align-self:stretch;background:var(--line)}
+/* ===== Manual de identidade (painel de demonstração) ===== */
+.bb{position:fixed;inset:0;z-index:40;background:var(--bg);color:var(--fg);overflow-y:auto;overscroll-behavior:contain;padding-top:env(safe-area-inset-top, 0px)}
+.bb-bar{position:sticky;top:0;z-index:2;background:var(--band);color:var(--on-band)}
+.bb-bar .wrap{display:flex;align-items:center;gap:16px;min-height:60px}
+.bb-bar p{font-size:14px;color:var(--on-band-muted);margin-left:auto}
+.bb-close{background:none;border:1px solid rgba(242,237,225,.35);color:var(--on-band);font:600 14px var(--body);padding:9px 14px;border-radius:3px;cursor:pointer;min-height:40px}
+.bb-close:hover{border-color:var(--on-band)}
+.bb-hero .wrap{padding-block:56px 40px;display:grid;gap:12px;max-width:1160px}
+.bb-hero h2{font-size:clamp(34px,5vw,54px)}
+.bb-hero p{color:var(--muted);max-width:62ch}
+.bb-sec{border-top:1px solid var(--line)}
+.bb-sec > .wrap{padding-block:48px;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:28px 48px}
+.bb-sec h3{font-size:28px}
+.bb-head{display:grid;gap:10px;align-content:start}
+.bb-head p{color:var(--muted);font-size:15.5px}
+.bb-body{min-width:0;display:grid;gap:24px;align-content:start}
+.bb-end{height:120px}
+@media (max-width: 860px){ .bb-sec > .wrap{grid-template-columns:1fr} .bb-bar p{display:none} }
+
+.bb-name{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.bb-name > div{display:grid;gap:6px;align-content:start;border-top:1px solid var(--accent);padding-top:14px}
+.bb-name dt{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bb-name dd{margin:0}
+@media (max-width: 760px){ .bb-name{grid-template-columns:1fr} }
+
+.bb-logo{display:grid;justify-items:center;text-align:center;gap:10px}
+.bb-logo .w{font-family:var(--display);font-weight:500;font-size:46px;line-height:1;letter-spacing:.16em;margin-right:-.16em}
+.bb-logo .d{font-family:var(--body);font-weight:500;font-size:10px;letter-spacing:.3em;margin-right:-.3em;text-transform:uppercase}
+.bb-logo .r{width:32px;height:1px;background:var(--accent)}
+[data-version="b"] .bb-logo{justify-items:start;text-align:left}
+[data-version="b"] .bb-logo .w{font-weight:700;letter-spacing:-.02em;margin-right:0}
+[data-version="b"] .bb-logo .d{letter-spacing:.18em;margin-right:0}
+[data-version="b"] .bb-logo .r{height:3px;width:28px}
+.logo-pos{color:var(--band)} .logo-pos .d{color:var(--fg)}
+[data-version="b"] .logo-pos{color:var(--fg)}
+.logo-neg{color:var(--plaque-gold)} .logo-neg .d{color:var(--on-band)}
+[data-version="b"] .logo-neg{color:var(--on-band)}
+.logo-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.logo-tile{min-height:200px;display:grid;place-items:center;padding:32px 20px;border:1px solid var(--line);overflow:hidden}
+.logo-tile.on-light{background:var(--surface)} .logo-tile.on-dark{background:var(--band);border-color:var(--band)}
+.cap{font-size:13.5px;color:var(--muted);margin-top:8px}
+.clear-box{outline:1px dashed var(--accent-text);outline-offset:0;padding:46px}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rules > div{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:2px}
+.rules b{font-size:15px} .rules span{color:var(--muted);font-size:14.5px}
+.wrong{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.wrong figure{margin:0;display:grid;gap:8px}
+.wrong .logo-tile{min-height:120px;padding:16px 10px;position:relative}
+.wrong .bb-logo .w{font-size:26px} .wrong .bb-logo .d{font-size:7px}
+.wrong figcaption{font-size:13.5px;color:var(--muted)}
+.wrong figcaption b{color:var(--neg);margin-right:4px}
+.wrong .bb-logo{justify-items:center !important;text-align:center !important}
+.no-stretch .bb-logo{transform:scaleX(1.4);transform-origin:center}
+.no-color .w{color:#B5452F !important} .no-color .d{color:#2F7DB5 !important}
+.no-contrast{background:color-mix(in srgb, var(--accent) 22%, var(--bg)) !important}
+.no-contrast .w,.no-contrast .d{color:color-mix(in srgb, var(--accent) 70%, var(--bg)) !important}
+.no-effects .w{text-shadow:3px 3px 0 var(--accent),0 0 12px rgba(0,0,0,.35)}
+@media (max-width: 760px){ .logo-row,.rules{grid-template-columns:1fr} .wrong{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+.swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.swatch{border:1px solid var(--line);background:var(--surface);display:grid;grid-template-rows:96px auto}
+.swatch .chip{border-bottom:1px solid var(--line)}
+.swatch .info{padding:12px 14px 14px;display:grid;gap:6px;align-content:start}
+.swatch b{font-size:16px}
+.swatch .sig{font-size:14.5px}
+.swatch .codes{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;display:grid;gap:1px;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.swatch .uso{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:6px}
+@media (max-width: 900px){ .swatches{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width: 520px){ .swatches{grid-template-columns:1fr} }
+.prop{display:flex;height:44px;border:1px solid var(--line)}
+.prop div{display:flex;align-items:center;padding:0 10px;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.tbl th{text-align:left;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line)}
+.tbl td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:middle}
+.tbl tr:first-child td{border-top:0}
+.tbl .num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.aa{display:inline-grid;place-items:center;width:52px;height:36px;font-weight:600;font-size:18px;border-radius:3px}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:#2E6B45} .pill.mid{color:#8A5A12} .pill.bad{color:var(--neg)}
+
+.type-row{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:12px 28px;border-top:1px solid var(--line);padding-top:18px}
+.type-row .meta{display:grid;gap:4px;align-content:start;font-size:14.5px}
+.type-row .meta b{font-size:16px}
+.type-row .meta span{color:var(--muted)}
+.type-row .sample{min-width:0;overflow-wrap:anywhere}
+.s-display{font-family:var(--display);font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.1}
+[data-version="b"] .s-display{font-weight:700;letter-spacing:-.02em}
+.s-italic{font-family:var(--display);font-style:italic;font-size:clamp(24px,3vw,30px);line-height:1.3}
+[data-version="b"] .s-italic{font-weight:500}
+.s-body{font-family:var(--body);font-size:17px;max-width:56ch}
+.s-body .nums{display:block;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (max-width: 760px){ .type-row{grid-template-columns:1fr} }
+.scale{display:grid;gap:0;border-top:1px solid var(--line)}
+.scale > div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:baseline;padding-block:10px;border-bottom:1px solid var(--line)}
+.scale small{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+.scale .x{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+
+.voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.voice ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.principles > div{border-top:1px solid var(--accent);padding-top:12px;display:grid;gap:4px}
+.principles span{color:var(--muted);font-size:15px}
+@media (max-width: 680px){ .voice,.principles{grid-template-columns:1fr} }
+
+.apps{display:grid;gap:32px}
+.cards{display:flex;flex-wrap:wrap;gap:20px}
+.bcard{width:340px;max-width:100%;aspect-ratio:85/55;box-shadow:0 14px 30px -18px rgba(20,35,28,.55);display:grid;place-items:center;position:relative}
+.bcard.front{background:var(--band)}
+.bcard.front::after{content:"";position:absolute;inset:12px;border:1px solid rgba(203,170,109,.55)}
+.bcard.back{background:#FBF9F4;color:#24282B;place-items:stretch;padding:22px 24px;align-content:space-between;grid-template-rows:auto 1fr auto;border:1px solid var(--line)}
+.bcard.back .who b{display:block;font-family:var(--display);font-size:22px;font-weight:600;color:#1D3A2E}
+.bcard.back .who span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A5C28}
+.bcard.back .ct{font-size:11.5px;line-height:1.6;color:#5A605D;align-self:end;font-variant-numeric:tabular-nums}
+.bcard.back .mt{font-family:var(--display);font-style:italic;font-size:13px;color:#1D3A2E;border-top:1px solid #B8955A;padding-top:6px;margin-top:10px}
+.mail{background:#FFFFFF;color:#24282B;border:1px solid var(--line);max-width:560px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5}
+.mail-h{padding:10px 16px;border-bottom:1px solid #E6E1D6;font-size:12.5px;color:#6B706D;display:grid;gap:2px}
+.mail-b{padding:18px 16px 22px;display:grid;gap:14px}
+.sig{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;border-top:1px solid #E6E1D6;padding-top:14px}
+.sig .wm{font-family:Georgia,"Times New Roman",serif;color:#1D3A2E;font-size:20px;letter-spacing:.16em;border-right:2px solid #B8955A;padding-right:16px;line-height:1.2}
+.sig .wm small{display:block;font-family:Arial,sans-serif;font-size:8.5px;letter-spacing:.2em;color:#24282B;margin-top:3px}
+.sig b{color:#1D3A2E}
+.sig .lines{font-size:12.5px;color:#5A605D;font-variant-numeric:tabular-nums}
+.sig .lines i{font-family:Georgia,serif;color:#1D3A2E}
+.wall{background:linear-gradient(135deg,#D8D1C2,#C9C1AF);padding:40px 20px;display:grid;place-items:center;max-width:620px}
+.plate{background:var(--band);padding:34px 40px 30px;outline:1px solid #CBAA6D;outline-offset:-10px;box-shadow:0 18px 30px -16px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08);display:grid;justify-items:center;gap:8px;text-align:center;max-width:100%}
+.plate .bb-logo .w{font-size:40px}
+.plate .m{font-family:var(--display);font-style:italic;color:#F2EDE1;font-size:16px;margin-top:4px}
+.plate .floor{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#B9C4BC;margin-top:6px}
+.app-h{display:grid;gap:4px;margin-bottom:12px}
+.app-h span{color:var(--muted);font-size:14.5px}
+.b-only{border:1px dashed var(--line);padding:20px;color:var(--muted)}
+.switcher{z-index:50}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand nm" href="#inicio">ELOVA</a>
+    <nav class="nav" id="nav-main" aria-label="Principal">
+      <a href="#servicos" data-i18n="nav1">Serviços</a>
+      <a href="#honorarios" data-i18n="nav6">Honorários</a>
+      <a href="#transparencia" data-i18n="nav2">Transparência</a>
+      <a href="#mudar" data-i18n="nav3">Como mudar</a>
+      <a href="#zona" data-i18n="nav4">Zona</a>
+      <a href="#perguntas" data-i18n="nav5">Perguntas</a>
+      <a href="#contacto" class="nav-cta" data-i18n="cta">Pedir proposta</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-gold" href="#contacto" data-i18n="cta">Pedir proposta</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-main"><span aria-hidden="true" class="menu-ico"></span><span>Menu</span></button>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div class="plaque">
+        <h1 class="nm">ELOVA</h1>
+        <p class="sub" data-i18n="sub">Administração de Condomínios</p>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="motto" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
+      </div>
+      <p class="hero-intro" data-i18n="heroIntro">Administramos condomínios no Porto e em Vila Nova de Gaia. As contas estão abertas a todos os condóminos, os pedidos têm resposta num dia útil e cada edifício tem um gestor que o conhece.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-gold" href="#contacto" data-i18n="cta">Pedir proposta</a>
+        <a class="btn btn-line" href="#mudar" data-i18n="cta2">Como mudar de administração</a>
+      </div>
+      <p class="hero-place">Porto · Vila Nova de Gaia</p>
+    </div>
+  </section>
+
+  <section class="commit" aria-labelledby="commit-t">
+    <div class="wrap">
+      <div class="commit-head">
+        <p class="label" id="commit-t" data-i18n="commitT">Compromissos escritos no contrato</p>
+        <span class="demo-note" data-i18n="commitNote">Proposta de compromissos, a validar</span>
+      </div>
+      <div class="commit-grid">
+        <div><h3 data-i18n="c1t">Conta em nome do condomínio</h3><p data-i18n="c1">O dinheiro fica numa conta bancária em nome do condomínio. A comissão de condóminos pode ter acesso de consulta.</p></div>
+        <div><h3 data-i18n="c2t">Relatório todos os meses</h3><p data-i18n="c2">Receitas, despesas, quotas em atraso e fundo de reserva, com as faturas anexas. Enviado até ao dia 10.</p></div>
+        <div><h3 data-i18n="c3t">Resposta num dia útil</h3><p data-i18n="c3">Todos os pedidos têm resposta no dia útil seguinte e acompanhamento até estarem resolvidos.</p></div>
+        <div><h3 data-i18n="c4t">Obras com propostas comparadas</h3><p data-i18n="c4">As pequenas reparações são resolvidas com a nossa rede de parceiros de confiança. Para obras de maior dimensão, consultamos o mercado e apresentamos várias propostas lado a lado.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="quem-somos" aria-labelledby="about-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-i18n="aboutL">Quem somos</p>
+        <h2 id="about-t" data-i18n="aboutT">Experiência e proximidade</h2>
+      </div>
+      <div class="sec-body">
+        <div class="prose">
+          <p data-i18n="about1">Somos dois sócios e, entre nós, trazemos mais de 10 anos de experiência no setor. Hoje administramos 8 condomínios no Porto e em Gaia.</p>
+          <p data-i18n="about2">Sabemos o que os condóminos mais valorizam: contas claras, respostas rápidas e obras bem acompanhadas. Crescemos de forma sustentada e assumimos novos edifícios quando lhes podemos dar o mesmo acompanhamento que damos aos atuais.</p>
+          <p data-i18n="about3">Trabalhamos em português e em inglês, do atendimento diário às assembleias.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>10+</dt><dd data-i18n="f1">anos de experiência no setor</dd></div>
+          <div><dt>8</dt><dd data-i18n="f2">condomínios administrados no Porto e em Gaia</dd></div>
+          <div><dt>PT · EN</dt><dd data-i18n="f3">atendimento, relatórios e assembleias nas duas línguas</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="servicos" aria-labelledby="serv-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-i18n="servL">Serviços</p>
+        <h2 id="serv-t" data-i18n="servT">O que fazemos</h2>
+        <p data-i18n="servP">Tudo o que um condomínio precisa no dia a dia, com uma só equipa e um só contacto.</p>
+      </div>
+      <div class="sec-body">
+        <ul class="services">
+          <li><h3 data-i18n="s1t">Administração do condomínio</h3><ul data-i18n="s1"><li>Gestão corrente das partes comuns</li><li>Contratos de limpeza, elevadores e jardinagem, revistos todos os anos</li><li>Seguros obrigatórios e participação de sinistros</li></ul></li>
+          <li><h3 data-i18n="s2t">Gestão financeira e contas</h3><ul data-i18n="s2"><li>Orçamento anual por fração, de acordo com a permilagem</li><li>Cobrança de quotas e gestão de pagamentos</li><li>Fundo comum de reserva em conta própria e relatório mensal</li></ul></li>
+          <li><h3 data-i18n="s3t">Manutenção e obras</h3><ul data-i18n="s3"><li>Visita técnica a cada edifício pelo menos uma vez por trimestre</li><li>Pequenas reparações resolvidas com parceiros de confiança</li><li>Consulta ao mercado e comparação de propostas para obras de maior dimensão</li><li>Acompanhamento da obra até à receção e durante a garantia</li></ul></li>
+          <li><h3 data-i18n="s4t">Assembleias e atas</h3><ul data-i18n="s4"><li>Convocatória com ordem de trabalhos e documentos em anexo</li><li>Condução da assembleia, presencial ou por videoconferência</li><li>Ata enviada a todos os condóminos em 10 dias</li></ul></li>
+          <li><h3 data-i18n="s5t">Apoio jurídico</h3><ul data-i18n="s5"><li>Recuperação de quotas em atraso, dando prioridade a soluções amigáveis</li><li>Revisão e atualização do regulamento do condomínio</li><li>Acompanhamento por advogados parceiros especializados em propriedade horizontal</li></ul></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="honorarios" aria-labelledby="fee-t">
+    <div class="wrap wide">
+      <div class="sec-head">
+        <p class="label" data-i18n="feeL">Honorários</p>
+        <h2 id="fee-t" data-i18n="feeT">Um orçamento à medida de cada condomínio</h2>
+        <p data-i18n="feeP">Os honorários são um valor mensal por fração, ajustado às necessidades de cada condomínio. Em edifícios maiores o valor por fração é mais baixo; em edifícios mais pequenos é um pouco mais alto, para garantir o mesmo acompanhamento.</p>
+      </div>
+      <div class="sec-body">
+        <div class="fees">
+          <div class="fee-factors"><h3 data-i18n="facT">O que faz variar o valor</h3><ul data-i18n="facL"><li>Número de frações</li><li>Elevadores e garagem</li><li>Piscina, jardins ou portaria</li><li>Estado de conservação do edifício</li></ul></div>
+          <div class="fee-factors"><h3 data-i18n="incT">Incluído na mensalidade</h3><ul data-i18n="incL"><li>Administração corrente e seguros</li><li>Cobrança de quotas</li><li>Contas e relatório mensal com faturas</li><li>Assembleia anual e ata</li><li>Visita técnica trimestral</li><li>Pequenas reparações com parceiros de confiança</li><li>Linha de urgências</li></ul></div>
+        </div>
+        <div class="fee-cta">
+          <p data-i18n="feeCta">Depois de uma primeira conversa e da visita ao edifício, enviamos uma proposta com o valor, o que está incluído e o que fica fora da mensalidade.</p>
+          <a class="btn btn-band" href="#contacto" data-i18n="cta">Pedir proposta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="transparencia" aria-labelledby="val-t">
+    <div class="wrap wide">
+      <div class="sec-head">
+        <p class="label" data-i18n="valL">Porque nós</p>
+        <h2 id="val-t" data-i18n="valT">Contas que qualquer condómino consegue ler</h2>
+        <p data-i18n="valP">A transparência é o que os condóminos mais valorizam numa administração. É nela que pomos mais cuidado.</p>
+      </div>
+      <div class="sec-body">
+        <div class="transp">
+          <div class="prose">
+            <p class="label" data-i18n="v1l">Transparência</p>
+            <h3 data-i18n="v1t">Sabe sempre quanto entrou, quanto saiu e porquê</h3>
+            <p data-i18n="v1a">Todos os meses cada condómino recebe um relatório como este, com as faturas anexas. Os números são os da conta bancária em nome do condomínio.</p>
+            <p data-i18n="v1b">Cada variação vem explicada. As quotas em atraso e os pedidos em aberto também aparecem, sem identificar condóminos.</p>
+          </div>
+          <figure class="report" style="margin:0" aria-label="Exemplo de relatório mensal">
+            <div class="report-head">
+              <div class="row1"><strong data-i18n="r0">Relatório mensal · outubro 2026</strong><span class="tag" data-i18n="rEx">Valores fictícios</span></div>
+              <span data-i18n="r1">Edifício Exemplo, Foz do Douro · 24 frações</span>
+            </div>
+            <table>
+              <thead><tr><th data-i18n="rRec">Receitas</th><th></th></tr></thead>
+              <tbody>
+                <tr><td data-i18n="r2">Quotas emitidas</td><td>2.880,00 €</td></tr>
+                <tr><td data-i18n="r3">Quotas cobradas</td><td>2.640,00 €</td></tr>
+              </tbody>
+              <thead><tr><th data-i18n="rDesp">Despesas</th><th></th></tr></thead>
+              <tbody>
+                <tr><td data-i18n="r4">Limpeza das partes comuns</td><td>620,00 €</td></tr>
+                <tr><td data-i18n="r5">Eletricidade das partes comuns</td><td>214,37 €</td></tr>
+                <tr><td data-i18n="r6">Manutenção dos elevadores</td><td>185,00 €</td></tr>
+                <tr><td data-i18n="r7">Seguro multirriscos (1/12)</td><td>142,50 €</td></tr>
+                <tr><td data-i18n="r8">Honorários de administração</td><td>360,00 €</td></tr>
+                <tr><td data-i18n="r9">Pintura da escadaria (2.ª prestação de 3)</td><td>950,00 €</td></tr>
+                <tr class="total"><td data-i18n="r10">Total de despesas</td><td>2.471,87 €</td></tr>
+                <tr><td data-i18n="r11">Transferência para o fundo comum de reserva</td><td>264,00 €</td></tr>
+                <tr class="total"><td data-i18n="r12">Resultado do mês</td><td class="neg">−95,87 €</td></tr>
+              </tbody>
+            </table>
+            <div class="report-foot">
+              <div><small data-i18n="r13">Saldo da conta corrente</small><b>6.412,55 €</b></div>
+              <div><small data-i18n="r14">Fundo comum de reserva</small><b>18.904,00 €</b></div>
+            </div>
+            <div class="report-notes">
+              <span data-i18n="r15">Quotas em atraso: 2 frações, 240,00 €. Lembrete enviado a 5 de outubro.</span>
+              <span data-i18n="r16">Pedidos dos condóminos: 7 recebidos, 7 respondidos num dia útil.</span>
+              <span data-i18n="r17">Anexos: 6 faturas em PDF.</span>
+            </div>
+          </figure>
+        </div>
+        <div class="value-list">
+          <div><p class="label" data-i18n="v2l">Competência</p><p data-i18n="v2">Conhecemos a lei da propriedade horizontal, os parceiros da zona e as necessidades de cada tipo de edifício, do prédio antigo da Baixa ao condomínio novo com garagem e piscina.</p></div>
+          <div><p class="label" data-i18n="v3l">Nível</p><p data-i18n="v3">Edifícios de qualidade pedem parceiros de qualidade e atenção ao pormenor: entradas cuidadas, jardins tratados, partes comuns que valorizam o imóvel.</p></div>
+          <div><p class="label" data-i18n="v4l">Rigor</p><p data-i18n="v4">Prazos cumpridos, decisões da assembleia executadas e registadas, documentos guardados e disponíveis quando são pedidos.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="mudar" aria-labelledby="step-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-i18n="stepL">Como trabalhamos</p>
+        <h2 id="step-t" data-i18n="stepT">Como mudar de administração</h2>
+        <p data-i18n="stepP">É um processo simples. Tratamos da parte burocrática e o dia a dia do prédio continua normalmente.</p>
+      </div>
+      <div class="sec-body">
+        <ol class="steps">
+          <li><h3 data-i18n="st1t">Conversa e visita ao edifício</h3><p data-i18n="st1">Ouvimos a comissão ou os condóminos interessados e visitamos as partes comuns. A visita é gratuita.</p></li>
+          <li><h3 data-i18n="st2t">Proposta escrita</h3><p data-i18n="st2">O valor por fração, o que está incluído e os compromissos de serviço.</p></li>
+          <li><h3 data-i18n="st3t">Decisão em assembleia</h3><p data-i18n="st3">A assembleia de condóminos aprova a nova administração. Ajudamos a preparar a convocatória e a ordem de trabalhos.</p></li>
+          <li><h3 data-i18n="st4t">Passagem de pasta</h3><p data-i18n="st4">Pedimos à administração anterior toda a documentação: atas, contas, contratos, apólices e chaves. Conferimos tudo e enviamos-lhe um resumo do que recebemos.</p></li>
+          <li><h3 data-i18n="st5t">Primeiro relatório e plano para o ano</h3><p data-i18n="st5">No primeiro mês recebe o estado das contas e um plano de manutenção com prioridades e custos estimados.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="zona" aria-labelledby="zone-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-i18n="zoneL">Zona de atuação</p>
+        <h2 id="zone-t" data-i18n="zoneT">Porto e Vila Nova de Gaia</h2>
+        <p data-i18n="zoneP">Concentramo-nos nas duas margens do Douro, perto dos edifícios que administramos. Chegamos a qualquer um deles em menos de 30 minutos.</p>
+      </div>
+      <div class="sec-body">
+        <div class="cities">
+          <div class="city"><h3>Porto</h3><p>Foz do Douro · Nevogilde · Aldoar · Boavista · Lordelo do Ouro · <span data-i18n="zBaixa">Baixa</span></p></div>
+          <div class="city"><h3>Vila Nova de Gaia</h3><p>Canidelo · Santa Marinha · Mafamude · Madalena · Arcozelo · Miramar</p></div>
+        </div>
+        <p class="zone-more" data-i18n="zMore">Tem um edifício noutra zona do Grande Porto? Fale connosco.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="testemunhos" aria-labelledby="quote-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-i18n="qL">Clientes</p>
+        <h2 id="quote-t" data-i18n="qT">O que dizem os condóminos</h2>
+      </div>
+      <div class="sec-body">
+        <div class="quotes">
+          <figure class="quote"><span class="tag" data-i18n="qFic">Testemunho fictício</span><blockquote data-i18n="q1">Recebemos todos os meses o relatório com as faturas. Na última assembleia as contas foram aprovadas em dez minutos, porque todos já as conheciam.</blockquote><figcaption data-i18n="qA1">Ana M., comissão de condóminos, Boavista</figcaption></figure>
+          <figure class="quote"><span class="tag" data-i18n="qFic">Testemunho fictício</span><blockquote data-i18n="q2">Trataram de toda a mudança de administração e, no primeiro mês, já tínhamos um plano de obras para três anos. Cada pedido tem resposta no próprio dia.</blockquote><figcaption data-i18n="qA2">James R., proprietário, Foz do Douro</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="perguntas" aria-labelledby="faq-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-i18n="faqL">Perguntas frequentes</p>
+        <h2 id="faq-t" data-i18n="faqT">Antes de decidir</h2>
+      </div>
+      <div class="sec-body">
+        <div class="faq">
+          <details><summary data-i18n="fq1">Quanto custa?</summary><p data-i18n="fa1">Cobramos um valor mensal por fração. O valor por fração desce à medida que o edifício tem mais frações e ajusta-se às suas características, como elevadores, garagem ou piscina. Depois da visita enviamos uma proposta com o valor, o que está incluído e o que fica fora da mensalidade.</p></details>
+          <details><summary data-i18n="fq2">Podemos mudar de administração a meio do mandato?</summary><p data-i18n="fa2">A assembleia de condóminos pode eleger uma nova administração. Explicamos os passos e ajudamos a preparar a convocatória e a ordem de trabalhos.</p></details>
+          <details><summary data-i18n="fq3">O que acontece à documentação da administração anterior?</summary><p data-i18n="fa3">A administração cessante entrega toda a documentação do condomínio. Tratamos do pedido, recebemos os documentos e fazemos o inventário do que foi recebido.</p></details>
+          <details><summary data-i18n="fq4">Como acompanho as contas do meu condomínio?</summary><p data-i18n="fa4">Recebe por email, todos os meses, o relatório de receitas e despesas com as faturas anexas. Pode pedir qualquer outro documento e enviamo-lo no dia útil seguinte.</p></details>
+          <details><summary data-i18n="fq5">Em que línguas trabalham?</summary><p data-i18n="fa5">Em português e em inglês: atendimento, relatórios e assembleias. Quem não puder estar presente pode participar nas assembleias por videoconferência.</p></details>
+          <details><summary data-i18n="fq6">O que é o fundo comum de reserva?</summary><p data-i18n="fa6">É o dinheiro guardado para obras de conservação das partes comuns. Cada condómino contribui com pelo menos 10% da sua quota. Mantemo-lo numa conta própria e o saldo aparece em todos os relatórios.</p></details>
+          <details><summary data-i18n="fq7">Há apoio fora do horário de expediente?</summary><p data-i18n="fa7">Sim, temos uma linha de urgências disponível fora do horário. Contactamos de imediato o parceiro adequado e informamos os condóminos do que foi feito.</p></details>
+          <details><summary data-i18n="fq8">Fazem também gestão de imóveis?</summary><p data-i18n="fa8">Sim, também é possível. Gerimos imóveis de proprietários, do arrendamento à manutenção, numa área que vai ter marca própria: <span class="nm">ELOVA</span> Património.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="future" data-linha="patrimonio" hidden>
+    <div class="wrap">
+      <h2><span class="nm">ELOVA</span> Património</h2>
+      <p data-i18n="futP">Gestão de imóveis para proprietários que preferem delegar o dia a dia: arrendamento, manutenção, impostos e contas, com o mesmo relatório mensal.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="contacto" aria-labelledby="ct-t">
+    <div class="wrap wide">
+      <div class="sec-head">
+        <p class="label" data-i18n="ctL">Contacto</p>
+        <h2 id="ct-t" data-i18n="ctT">Fale connosco</h2>
+        <p data-i18n="ctP">Conte-nos um pouco sobre o edifício. Ligamos-lhe no dia útil seguinte para marcar uma conversa e a visita.</p>
+      </div>
+      <div class="sec-body">
+        <div class="contact">
+          <form id="form" novalidate>
+            <fieldset class="mode full">
+              <legend class="sr" data-i18n="modeL">O que pretende</legend>
+              <label class="seg" for="m-prop"><input type="radio" name="mode" value="proposta" id="m-prop" checked><span data-i18n="modeP">Pedir proposta</span></label>
+              <label class="seg" for="m-perg"><input type="radio" name="mode" value="pergunta" id="m-perg"><span data-i18n="modeQ">Fazer uma pergunta</span></label>
+            </fieldset>
+            <div class="field"><label for="f-name" data-i18n="lName">Nome</label><input id="f-name" name="name" autocomplete="name"></div>
+            <div class="field"><label for="f-email" data-i18n="lEmail">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+            <div class="field" data-only="proposta"><label for="f-phone" data-i18n="lPhone2">Telefone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field" data-only="proposta"><label for="f-role" data-i18n="lRole2">Relação com o edifício</label>
+              <select id="f-role" name="role">
+                <option data-i18n="o1">Condómino</option>
+                <option data-i18n="o2">Membro da comissão de condóminos</option>
+                <option data-i18n="o3">Administrador atual</option>
+                <option data-i18n="o5">Promotor de um edifício novo</option>
+                <option data-i18n="o6">Investidor com várias frações</option>
+                <option data-i18n="o4">Outro</option>
+              </select></div>
+            <div class="field full" data-only="proposta"><label for="f-zone" data-i18n="lZone">Zona do edifício</label>
+              <select id="f-zone" name="zone">
+                <option value="" data-i18n="zSel">Escolha a zona</option>
+                <optgroup label="Porto"><option>Foz do Douro</option><option>Nevogilde</option><option>Aldoar</option><option>Boavista</option><option>Lordelo do Ouro</option><option>Baixa</option><option value="porto-outra" data-i18n="zOtherP">Outra zona do Porto</option></optgroup>
+                <optgroup label="Vila Nova de Gaia"><option>Canidelo</option><option>Santa Marinha</option><option>Mafamude</option><option>Madalena</option><option>Arcozelo</option><option>Miramar</option><option value="gaia-outra" data-i18n="zOtherG">Outra zona de Gaia</option></optgroup>
+                <option value="outra" data-i18n="zOther">Outra zona do Grande Porto</option>
+              </select></div>
+            <fieldset class="field full q" data-only="proposta" id="f-units">
+              <legend data-i18n="lUnits">Número de frações</legend>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="units" value="ate10"><span data-i18n="u1">Até 10</span></label>
+                <label class="chip"><input type="radio" name="units" value="11-30"><span data-i18n="u2">11 a 30</span></label>
+                <label class="chip"><input type="radio" name="units" value="31-60"><span data-i18n="u3">31 a 60</span></label>
+                <label class="chip"><input type="radio" name="units" value="60+"><span data-i18n="u4">Mais de 60</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="more full" data-only="proposta">
+              <legend><span data-i18n="moreT">Ajude-nos a preparar a conversa</span> <span class="opt" data-i18n="opt">Opcional</span></legend>
+              <div class="q"><p class="q-l" data-i18n="qFeat">Características do edifício</p><div class="chips">
+                <label class="chip"><input type="checkbox" name="feat" value="elevadores"><span data-i18n="ft1">Elevadores</span></label>
+                <label class="chip"><input type="checkbox" name="feat" value="garagem"><span data-i18n="ft2">Garagem</span></label>
+                <label class="chip"><input type="checkbox" name="feat" value="piscina"><span data-i18n="ft3">Piscina</span></label>
+                <label class="chip"><input type="checkbox" name="feat" value="jardins"><span data-i18n="ft4">Jardins</span></label>
+                <label class="chip"><input type="checkbox" name="feat" value="portaria"><span data-i18n="ft5">Portaria</span></label>
+                <label class="chip"><input type="checkbox" name="feat" value="lojas"><span data-i18n="ft6">Lojas no rés-do-chão</span></label>
+              </div></div>
+              <div class="q"><p class="q-l" data-i18n="qAge">Idade aproximada do edifício</p><div class="chips">
+                <label class="chip"><input type="radio" name="age" value="0-5"><span data-i18n="ag1">Menos de 5 anos</span></label>
+                <label class="chip"><input type="radio" name="age" value="5-20"><span data-i18n="ag2">5 a 20 anos</span></label>
+                <label class="chip"><input type="radio" name="age" value="20+"><span data-i18n="ag3">Mais de 20 anos</span></label>
+              </div></div>
+              <div class="q"><p class="q-l" data-i18n="qNow">Quem administra hoje</p><div class="chips">
+                <label class="chip"><input type="radio" name="now" value="empresa"><span data-i18n="nw1">Uma empresa</span></label>
+                <label class="chip"><input type="radio" name="now" value="condominos"><span data-i18n="nw2">Os próprios condóminos</span></label>
+                <label class="chip"><input type="radio" name="now" value="novo"><span data-i18n="nw3">Ainda ninguém, edifício novo</span></label>
+              </div></div>
+              <div class="q"><p class="q-l" data-i18n="qVal">O que mais valorizam numa administração</p><div class="chips">
+                <label class="chip"><input type="checkbox" name="val" value="contas"><span data-i18n="vl1">Contas claras</span></label>
+                <label class="chip"><input type="checkbox" name="val" value="resposta"><span data-i18n="vl2">Resposta rápida</span></label>
+                <label class="chip"><input type="checkbox" name="val" value="obras"><span data-i18n="vl3">Acompanhamento de obras</span></label>
+                <label class="chip"><input type="checkbox" name="val" value="assembleias"><span data-i18n="vl4">Assembleias bem preparadas</span></label>
+                <label class="chip"><input type="checkbox" name="val" value="ingles"><span data-i18n="vl5">Atendimento em inglês</span></label>
+              </div></div>
+              <div class="q"><p class="q-l" data-i18n="qWorks">Há obras previstas ou urgentes?</p><div class="chips">
+                <label class="chip"><input type="radio" name="works" value="sim"><span data-i18n="yes">Sim</span></label>
+                <label class="chip"><input type="radio" name="works" value="nao"><span data-i18n="no">Não</span></label>
+                <label class="chip"><input type="radio" name="works" value="nao-sei"><span data-i18n="dk">Não sei</span></label>
+              </div></div>
+              <div class="q-row">
+                <div class="field"><label for="f-when" data-i18n="lWhen">Próxima assembleia ou fim do contrato atual</label><input id="f-when" name="when" type="date"></div>
+                <div class="field"><label for="f-lang" data-i18n="lLang">Língua preferida</label><select id="f-lang" name="lang"><option data-i18n="lgPT">Português</option><option data-i18n="lgEN">Inglês</option></select></div>
+              </div>
+              <div class="q"><p class="q-l" data-i18n="qHow">Como prefere ser contactado</p><div class="chips">
+                <label class="chip"><input type="radio" name="how" value="telefone"><span data-i18n="hw1">Telefone</span></label>
+                <label class="chip"><input type="radio" name="how" value="email"><span data-i18n="hw2">Email</span></label>
+                <label class="chip"><input type="radio" name="how" value="video"><span data-i18n="hw3">Videochamada</span></label>
+                <label class="chip"><input type="radio" name="slot" value="manha"><span data-i18n="sl1">De manhã</span></label>
+                <label class="chip"><input type="radio" name="slot" value="tarde"><span data-i18n="sl2">À tarde</span></label>
+              </div></div>
+            </fieldset>
+            <div class="field full"><label for="f-msg"><span data-i18n="lMsg">Mensagem</span> <span class="opt" data-only="proposta" data-i18n="opt">Opcional</span></label><textarea id="f-msg" name="message"></textarea></div>
+            <label class="check full field" for="f-ok"><input id="f-ok" name="ok" type="checkbox"><span data-i18n="lOk">Aceito que os meus dados sejam usados para responder a este pedido, de acordo com a política de privacidade.</span></label>
+            <div class="form-actions">
+              <button class="btn btn-band" type="submit"><span data-only="proposta" data-i18n="cta">Pedir proposta</span><span data-only="pergunta" data-i18n="sendQ" hidden>Enviar pergunta</span></button>
+              <span class="form-msg" id="form-msg" role="status" aria-live="polite"></span>
+            </div>
+            <p class="demo-note full" style="grid-column:1/-1" data-i18n="formNote">Formulário de demonstração. Nada é enviado.</p>
+          </form>
+          <dl class="details">
+            <div><dt data-i18n="dAddr">Escritório</dt><dd>Rua do Exemplo, 100, 4150-000 Porto<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+            <div><dt data-i18n="dPhone">Telefone</dt><dd>+351 220 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+            <div><dt data-i18n="dUrg">Urgências</dt><dd>+351 910 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+            <div><dt>Email</dt><dd>geral@<span class="nm-lower">elova</span>.exemplo<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+            <div><dt data-i18n="dHours">Horário</dt><dd data-i18n="hours">Dias úteis, das 9h00 às 18h30</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:grid;gap:10px">
+      <a class="brand nm" href="#inicio">ELOVA</a>
+      <p class="motto" style="font-size:20px;color:var(--on-band-muted)" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
+    </div>
+    <ul>
+      <li><span class="nm">ELOVA</span> <span data-i18n="lineC">Condomínios</span></li>
+      <li data-linha="patrimonio" hidden><span class="nm">ELOVA</span> <span data-i18n="lineP">Património</span></li>
+      <li>Porto · Vila Nova de Gaia</li>
+    </ul>
+    <ul>
+      <li><a href="#contacto" data-i18n="privacy">Política de privacidade</a></li>
+      <li><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener" data-i18n="complaints">Livro de Reclamações</a></li>
+    </ul>
+    <p class="foot-note"><span class="nm">ELOVA</span>, Lda. · NIF 500 000 000 · <span data-i18n="footNote">Site de demonstração. Contactos, moradas e números são fictícios.</span></p>
+  </div>
+</footer>
+
+<div class="switcher" aria-label="Demonstração">
+  <div class="sw-group" role="group" aria-label="Versão visual"><span class="sw-label" data-i18n="sw2">Versão</span></div>
+  <div class="sw-sep" aria-hidden="true"></div>
+  <div class="sw-group" role="group" aria-label="Comparar nome"><span class="sw-label" data-i18n="sw">Nome</span></div>
+  <div class="sw-sep" aria-hidden="true"></div>
+  <div class="sw-group"><button type="button" class="sw-bb" aria-pressed="false" aria-controls="identidade" data-i18n="swBB">Identidade</button></div>
+</div>
+
+<div class="bb" id="identidade" role="dialog" aria-modal="true" aria-labelledby="bb-title" hidden></div>
+
+<script>
+/* ===== Configuração =====
+   Troque aqui o nome e ligue a linha de serviço "Património" quando existir. */
+const CONFIG = {
+  nome: "ELOVA",
+  alternativas: ["CONDIGNO", "ELOVA", "VELIA"],
+  linhas: { condominios: true, patrimonio: false }
+};
+
+const EN = {
+  formOkQ:"Thank you. We will reply the next working day. This is a demo, so nothing was sent.",
+  sendQ:"Send question",
+  sl2:"In the afternoon",
+  sl1:"In the morning",
+  hw3:"Video call",
+  hw2:"Email",
+  hw1:"Phone",
+  qHow:"How would you like us to contact you",
+  lgEN:"English",
+  lgPT:"Portuguese",
+  lLang:"Preferred language",
+  lWhen:"Next owners' meeting or end of current contract",
+  dk:"Don't know",
+  no:"No",
+  yes:"Yes",
+  qWorks:"Are any works planned or urgent?",
+  vl5:"Service in English",
+  vl4:"Well-prepared owners' meetings",
+  vl3:"Works supervision",
+  vl2:"Quick answers",
+  vl1:"Clear accounts",
+  qVal:"What matters most to you in a manager",
+  nw3:"No one yet, new building",
+  nw2:"The owners themselves",
+  nw1:"A company",
+  qNow:"Who manages it today",
+  ag3:"Over 20 years",
+  ag2:"5 to 20 years",
+  ag1:"Under 5 years",
+  qAge:"Approximate age of the building",
+  ft6:"Shops on the ground floor",
+  ft5:"Concierge",
+  ft4:"Gardens",
+  ft3:"Pool",
+  ft2:"Garage",
+  ft1:"Lifts",
+  qFeat:"Building features",
+  opt:"Optional",
+  moreT:"Help us prepare the conversation",
+  u4:"More than 60",
+  u3:"31 to 60",
+  u2:"11 to 30",
+  u1:"Up to 10",
+  zOther:"Elsewhere in Greater Porto",
+  zOtherG:"Another area of Gaia",
+  zOtherP:"Another area of Porto",
+  zSel:"Choose an area",
+  lZone:"Building area",
+  o6:"Investor with several units",
+  o5:"Developer of a new building",
+  lRole2:"Your connection to the building",
+  lPhone2:"Phone",
+  modeQ:"Ask a question",
+  modeP:"Request a proposal",
+  modeL:"What would you like to do",
+  feeCta:"After a first conversation and a visit to the building, we send a proposal with the price, what is included and what falls outside the monthly fee.",
+  incL:"<li>Day-to-day management and insurance</li><li>Fee collection</li><li>Accounts and a monthly report with invoices</li><li>Annual owners' meeting and minutes</li><li>Quarterly technical visit</li><li>Small repairs through trusted partners</li><li>Emergency line</li>",
+  incT:"Included in the monthly fee",
+  facL:"<li>Number of units</li><li>Lifts and garage</li><li>Pool, gardens or concierge</li><li>Condition of the building</li>",
+  facT:"What changes the price",
+  feeP:"Our fee is a monthly amount per unit, tailored to what each building needs. In larger buildings the amount per unit is lower; in smaller buildings it is a little higher, so they get the same attention.",
+  feeT:"A quote tailored to each building",
+  feeL:"Fees",
+  qA2:"James R., owner, Foz do Douro",
+  qA1:"Ana M., owners' committee, Boavista",
+  q2:"They handled the whole switch of managers, and within the first month we had a three-year works plan. Every request gets an answer the same day.",
+  q1:"We receive the report with the invoices every month. At the last owners' meeting the accounts were approved in ten minutes, because everyone already knew them.",
+  qFic:"Fictitious testimonial",
+  zMore:"Have a building elsewhere in Greater Porto? Talk to us.",
+  nav1:"Services", nav6:"Fees", nav2:"Transparency", nav3:"Switching", nav4:"Area", nav5:"FAQ",
+  cta:"Request a proposal", cta2:"How to switch managers",
+  sub:"Condominium Management",
+  motto:"Connecting people.<br>Caring for property.",
+  heroIntro:"We manage residential buildings in Porto and Vila Nova de Gaia. The accounts are open to every owner, every request gets an answer within one working day, and each building has a manager who knows it.",
+  commitT:"Commitments written into the contract", commitNote:"Draft commitments, to be confirmed",
+  c1t:"An account in the building's name", c1:"The money sits in a bank account in the condominium's name. The owners' committee can have view access.",
+  c2t:"A report every month", c2:"Income, expenses, overdue fees and the reserve fund, with invoices attached. Sent by the 10th.",
+  c3t:"An answer within one working day", c3:"Every request gets a reply the next working day and is followed through until it is resolved.",
+  c4t:"Works with compared proposals", c4:"Small repairs are handled through our network of trusted partners. For larger works we go to the market and present several proposals side by side.",
+  aboutL:"About us", aboutT:"Experience, close at hand",
+  about1:"We are two partners with more than 10 years of experience in the sector between us. Today we manage 8 buildings in Porto and Gaia.",
+  about2:"We know what owners value most: clear accounts, quick answers and well-managed works. We grow steadily and take on new buildings when we can give them the same attention as the ones we already manage.",
+  about3:"We work in Portuguese and English, from day-to-day contact to owners' meetings.",
+  f1:"years of experience in the sector", f2:"buildings managed in Porto and Gaia", f3:"service, reports and meetings in both languages",
+  servL:"Services", servT:"What we do", servP:"Everything a building needs day to day, with one team and one point of contact.",
+  s1t:"Building management", s1:"<li>Day-to-day management of common areas</li><li>Cleaning, lift and garden contracts, reviewed every year</li><li>Mandatory insurance and claims</li>",
+  s2t:"Finance and accounts", s2:"<li>Annual budget per unit, based on each unit's share</li><li>Fee collection and payment management</li><li>Reserve fund in a separate account and a monthly report</li>",
+  s3t:"Maintenance and works", s3:"<li>Technical visit to every building at least once a quarter</li><li>Small repairs handled through trusted partners</li><li>Market tender and comparison of proposals for larger works</li><li>Supervising works through handover and warranty</li>",
+  s4t:"Owners' meetings and minutes", s4:"<li>Notice of meeting with agenda and documents attached</li><li>Chairing the meeting, in person or by video call</li><li>Minutes sent to every owner within 10 days</li>",
+  s5t:"Legal support", s5:"<li>Recovery of overdue fees, favouring amicable solutions</li><li>Reviewing and updating the building rules</li><li>Support from partner lawyers who specialise in condominium law</li>",
+  valL:"Why us", valT:"Accounts any owner can read", valP:"Transparency is what owners value most in a manager. It is where we put the most care.",
+  v1l:"Transparency", v1t:"You always know what came in, what went out, and why",
+  v1a:"Every month each owner receives a report like this one, with the invoices attached. The figures come from the bank account in the condominium's name.",
+  v1b:"Every change is explained. Overdue fees and open requests are listed too, without naming owners.",
+  r0:"Monthly report · October 2026", rEx:"Sample figures", r1:"Example Building, Foz do Douro · 24 units",
+  rRec:"Income", rDesp:"Expenses",
+  r2:"Fees issued", r3:"Fees collected", r4:"Cleaning of common areas", r5:"Electricity, common areas", r6:"Lift maintenance", r7:"Building insurance (1/12)", r8:"Management fee", r9:"Stairwell painting (instalment 2 of 3)", r10:"Total expenses", r11:"Transfer to the reserve fund", r12:"Result for the month",
+  r13:"Current account balance", r14:"Reserve fund",
+  r15:"Overdue fees: 2 units, €240.00. Reminder sent on 5 October.", r16:"Owner requests: 7 received, 7 answered within one working day.", r17:"Attachments: 6 invoices (PDF).",
+  v2l:"Competence", v2:"We know Portuguese condominium law, the local partners and the needs of each kind of building, from an old townhouse in the Baixa to a new block with a garage and pool.",
+  v3l:"Standards", v3:"Quality buildings need quality partners and attention to detail: well-kept entrances, tended gardens, common areas that add to the property's value.",
+  v4l:"Rigour", v4:"Deadlines met, owners' decisions carried out and recorded, documents kept and available when asked for.",
+  stepL:"How we work", stepT:"How to switch managers", stepP:"It is a simple process. We handle the paperwork and day-to-day life in the building carries on as normal.",
+  st1t:"Conversation and building visit", st1:"We listen to the committee or the owners involved and visit the common areas. The visit is free.",
+  st2t:"Written proposal", st2:"The price per unit, what is included and our service commitments.",
+  st3t:"Decision at the owners' meeting", st3:"The owners' meeting approves the new manager. We help prepare the notice and the agenda.",
+  st4t:"Handover", st4:"We request all records from the previous manager: minutes, accounts, contracts, policies and keys. We check everything and send you a summary of what we received.",
+  st5t:"First report and a plan for the year", st5:"In the first month you receive the state of the accounts and a maintenance plan with priorities and estimated costs.",
+  zoneL:"Where we work", zoneT:"Porto and Vila Nova de Gaia", zoneP:"We focus on the two banks of the Douro, close to the buildings we manage. We can reach any of them in under 30 minutes.", zBaixa:"Baixa (city centre)",
+  qL:"Clients", qT:"What owners say",
+  faqL:"FAQ", faqT:"Before you decide",
+  fq1:"How much does it cost?", fa1:"We charge a monthly amount per unit. The amount per unit goes down as the number of units goes up, and it reflects the building, such as lifts, a garage or a pool. After the visit we send a proposal with the price, what is included and what falls outside the monthly fee.",
+  fq2:"Can we switch managers mid-term?", fa2:"The owners' meeting can elect a new manager. We explain the steps and help prepare the notice and the agenda.",
+  fq3:"What happens to the previous manager's records?", fa3:"The outgoing manager hands over all of the condominium's records. We make the request, receive the documents and keep an inventory of everything received.",
+  fq4:"How do I follow my building's accounts?", fa4:"Every month you receive the income and expenses report by email, with invoices attached. You can ask for any other document and we send it the next working day.",
+  fq5:"Which languages do you work in?", fa5:"Portuguese and English: day-to-day contact, reports and owners' meetings. Anyone who cannot attend in person can join meetings by video conference.",
+  fq6:"What is the reserve fund?", fa6:"It is money set aside for maintenance works on the common areas. Each owner contributes at least 10% of their fee. We keep it in a separate account and the balance appears in every report.",
+  fq7:"Is there support out of hours?", fa7:"Yes, we have an emergency line out of hours. We contact the right partner straight away and tell the owners what was done.",
+  fq8:"Do you also manage individual properties?", fa8:"Yes, we can. We manage individual properties for owners, from lettings to maintenance, in a service that will have its own brand: {N} Património.",
+  futP:"Property management for owners who prefer to delegate the day to day: lettings, maintenance, taxes and accounts, with the same monthly report.",
+  ctL:"Contact", ctT:"Talk to us", ctP:"Tell us a little about the building. We will call you the next working day to arrange a conversation and a visit.",
+  lName:"Name", lEmail:"Email", o1:"An owner", o2:"A member of the owners' committee", o3:"The current manager", o4:"Other", lUnits:"Number of units", lMsg:"Message",
+  lOk:"I agree that my details may be used to reply to this request, in line with the privacy policy.", formNote:"Demo form. Nothing is sent.",
+  dAddr:"Office", dPhone:"Phone", dUrg:"Emergencies", dHours:"Hours", hours:"Working days, 9:00 to 18:30", ex:"sample",
+  lineC:"Condomínios", lineP:"Património",
+  privacy:"Privacy policy", complaints:"Complaints Book (Livro de Reclamações)",
+  footNote:"Demo website. Contacts, addresses and numbers are fictitious.",
+  sw:"Name", sw2:"Version", swBB:"Brand",
+  formOk:"Thank you. We will call you the next working day to arrange a visit to the building. This is a demo, so nothing was sent.", formErr:"Some details are missing. Please check the highlighted fields."
+};
+const PT_EXTRA = {
+  formOk:"Obrigado. Ligamos-lhe no dia útil seguinte para marcar a visita ao edifício. Isto é uma demonstração, por isso nada foi enviado.",
+  formOkQ:"Obrigado. Respondemos no dia útil seguinte. Isto é uma demonstração, por isso nada foi enviado.",
+  formErr:"Faltam alguns dados. Verifique os campos assinalados."
+};
+
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+};
+
+// Guarda o texto português original de cada elemento, para poder voltar a ele.
+const PT = {};
+document.querySelectorAll("[data-i18n]").forEach(el => {
+  const k = el.dataset.i18n;
+  if (!(k in PT)) PT[k] = el.innerHTML;
+});
+
+let lang = store.get("lang") === "en" ? "en" : "pt";
+let versao = "a";
+try {
+  const qv = (new URLSearchParams(location.search).get("versao") || store.get("versao") || "").toLowerCase();
+  if (qv === "a" || qv === "b") versao = qv;
+} catch(e){}
+let nome = CONFIG.nome;
+try {
+  const q = new URLSearchParams(location.search).get("nome");
+  const saved = store.get("nome");
+  const pick = (q || saved || "").toUpperCase();
+  if (CONFIG.alternativas.includes(pick)) nome = pick;
+} catch(e){}
+
+function t(k){
+  if (lang === "en" && EN[k] != null) return EN[k].replaceAll("{N}", '<span class="nm"></span>');
+  return PT[k] != null ? PT[k] : PT_EXTRA[k];
+}
+
+function applyName(){
+  document.querySelectorAll(".nm").forEach(el => el.textContent = nome);
+  document.querySelectorAll(".nm-lower").forEach(el => el.textContent = nome.toLowerCase());
+  document.title = nome + (lang === "en" ? " Condominium Management" : " Condomínios");
+  document.querySelectorAll("[data-nome]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.nome === nome)));
+  const bb = document.getElementById("identidade"); if (bb && !bb.hidden && typeof renderBrand === "function") renderBrand();
+}
+
+function applyLang(){
+  document.documentElement.lang = lang === "en" ? "en" : "pt-PT";
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const v = t(el.dataset.i18n);
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  applyName();
+}
+
+function applyLines(){
+  document.querySelectorAll("[data-linha]").forEach(el => { el.hidden = !CONFIG.linhas[el.dataset.linha]; });
+}
+
+// Painel de demonstração: versão visual e nome
+function applyVersion(){
+  if (versao === "b") document.documentElement.dataset.version = "b";
+  else delete document.documentElement.dataset.version;
+  document.querySelectorAll("[data-versao]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.versao === versao)));
+  const bb = document.getElementById("identidade"); if (bb && !bb.hidden) renderBrand();
+}
+const groups = document.querySelectorAll(".switcher .sw-group");
+["a","b"].forEach(v => {
+  const b = document.createElement("button");
+  b.type = "button"; b.dataset.versao = v; b.textContent = v.toUpperCase();
+  b.addEventListener("click", () => { versao = v; store.set("versao", v); applyVersion(); });
+  groups[0].appendChild(b);
+});
+const sw = groups[1];
+CONFIG.alternativas.forEach(n => {
+  const b = document.createElement("button");
+  b.type = "button"; b.dataset.nome = n; b.textContent = n;
+  b.addEventListener("click", () => { nome = n; store.set("nome", n); applyName(); });
+  sw.appendChild(b);
+});
+
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.lang; store.set("lang", lang); applyLang();
+}));
+
+const form = document.getElementById("form");
+function setMode(m){
+  form.querySelectorAll("[data-only]").forEach(el => { el.hidden = el.dataset.only !== m; });
+  const msg = document.getElementById("form-msg"); msg.textContent = ""; msg.classList.remove("err");
+  form.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
+}
+form.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener("change", () => setMode(form.mode.value)));
+document.querySelectorAll('a[href="#contacto"]').forEach(a => a.addEventListener("click", () => { form.querySelector("#m-prop").checked = true; setMode("proposta"); }));
+// Demonstração: valida no navegador e mostra a confirmação. Nada é enviado.
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const f = form, mode = f.mode.value, msg = document.getElementById("form-msg");
+  f.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
+  const bad = [];
+  if (!f.name.value.trim()) bad.push(f.name);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) bad.push(f.email);
+  if (mode === "proposta") {
+    if (f.phone.value.replace(/\D/g, "").length < 9) bad.push(f.phone);
+    if (!f.zone.value) bad.push(f.zone);
+    if (!f.querySelector('input[name="units"]:checked')) bad.push(document.getElementById("f-units"));
+  } else if (!f.message.value.trim()) bad.push(f.message);
+  if (!f.ok.checked) bad.push(f.ok);
+  if (bad.length) {
+    bad.forEach(el => el.setAttribute("aria-invalid", "true"));
+    msg.textContent = t("formErr").replace(/<[^>]+>/g, ""); msg.classList.add("err");
+    const first = bad[0].tagName === "FIELDSET" ? bad[0].querySelector("input") : bad[0];
+    first.focus();
+    return;
+  }
+  f.reset(); setMode("proposta");
+  msg.textContent = t(mode === "proposta" ? "formOk" : "formOkQ").replace(/<[^>]+>/g, "");
+});
+
+// ===== Manual de identidade =====
+const NAMES = {
+  CONDIGNO:{orig:"Do português <em>condigno</em>: adequado, à altura, merecido.",
+    ideia:"Uma administração à altura do edifício e de quem lá vive. Começa por CON, como condomínio, e é uma palavra que existe, o que lhe dá peso e seriedade.",
+    nota:"É uma palavra pouco usada no dia a dia, por isso pode precisar de ser explicada uma vez."},
+  ELOVA:{orig:"De <em>elo</em>: a peça que une as outras numa corrente.",
+    ideia:"A administração como o elo entre condóminos, parceiros e o edifício, que é o que diz a primeira metade do mote: Ligamos pessoas. A terminação em -va dá-lhe um som suave, fácil de dizer em português e em inglês.",
+    nota:"É um nome inventado, o que facilita o registo da marca e do domínio e torna a empresa fácil de encontrar online."},
+  VELIA:{orig:"De <em>velar</em>: cuidar de alguma coisa com atenção constante.",
+    ideia:"Liga-se à segunda metade do mote: Cuidamos do património. É curto, abre e fecha em vogal e lê-se da mesma forma em várias línguas.",
+    nota:"Existe como nome próprio e como nome de uma cidade antiga no sul de Itália. Convém confirmar o registo da marca e o domínio."}
+};
+const BRAND = {
+  a:{ title:"Versão A · Verde e dourado",
+    intro:"Clássica e patrimonial. Parte da paleta e das propostas de logótipo trazidas pelos sócios, com ajustes de contraste para leitura em ecrã.",
+    colors:[
+      {n:"Verde profundo",hex:"#1D3A2E",sig:"Confiança, estabilidade, património.",uso:"Topo, abertura, rodapé e botões secundários."},
+      {n:"Dourado suave",hex:"#B8955A",sig:"Excelência, qualidade, valor.",uso:"Filetes e pormenores. Não usar em texto sobre marfim."},
+      {n:"Dourado escuro",hex:"#7A5C28",sig:"O dourado em versão legível.",uso:"Etiquetas e texto em destaque sobre fundos claros."},
+      {n:"Dourado placa",hex:"#CBAA6D",sig:"O tom do metal escovado de uma placa.",uso:"Logótipo e botão principal sobre verde."},
+      {n:"Marfim",hex:"#F5F1E8",sig:"Elegância, proximidade, equilíbrio.",uso:"Fundo principal."},
+      {n:"Antracite",hex:"#24282B",sig:"Profissionalismo, modernidade, rigor.",uso:"Texto corrido e títulos."}],
+    prop:[["Marfim","#F5F1E8",60,"#24282B"],["Verde profundo","#1D3A2E",30,"#F2EDE1"],["Dourado","#B8955A",10,"#1D3A2E"]],
+    pairs:[["Antracite","#24282B","Marfim","#F5F1E8"],["Cinzento de texto","#5A605D","Marfim","#F5F1E8"],["Dourado escuro","#7A5C28","Marfim","#F5F1E8"],["Dourado suave","#B8955A","Marfim","#F5F1E8"],["Marfim","#F2EDE1","Verde profundo","#1D3A2E"],["Dourado placa","#CBAA6D","Verde profundo","#1D3A2E"]],
+    type:[
+      {role:"Nome e títulos",fam:"Cormorant Garamond",w:"Pesos 500 e 600",why:"Serifa clássica de alto contraste. Transmite tradição, cuidado e permanência.",fb:"Word e email: Garamond ou Georgia.",cls:"s-display",txt:"Contas que qualquer condómino consegue ler"},
+      {role:"Mote e citações",fam:"Cormorant Garamond itálico",w:"Pesos 400 e 500",why:"O itálico dá ao mote um tom pessoal, próximo de uma frase escrita à mão.",fb:"Word e email: Georgia itálico.",cls:"s-italic",txt:"Ligamos pessoas. Cuidamos do património."},
+      {role:"Texto, etiquetas e formulários",fam:"Hanken Grotesk",w:"Pesos 400, 500 e 600",why:"Sem serifa clara e legível em ecrã, mesmo em tamanhos pequenos. Equilibra a serifa dos títulos.",fb:"Word e email: Arial ou Calibri.",cls:"s-body",txt:"Todos os meses cada condómino recebe o relatório de receitas e despesas, com as faturas anexas."}]
+  },
+  b:{ title:"Versão B · Granito e azul do Douro",
+    intro:"Contemporânea e clara. Proposta feita sem paleta de partida, a partir do Porto e do argumento principal da empresa: contas transparentes.",
+    colors:[
+      {n:"Ardósia",hex:"#1E2A35",sig:"Solidez, seriedade, discrição.",uso:"Topo, abertura e rodapé."},
+      {n:"Azul Douro",hex:"#2F5F8F",sig:"Confiança e clareza. É a cor mais associada a serviços financeiros.",uso:"Única cor de destaque: filetes, etiquetas e ligações."},
+      {n:"Azul Douro escuro",hex:"#24507C",sig:"O azul com mais contraste.",uso:"Texto em destaque sobre fundos claros."},
+      {n:"Pedra clara",hex:"#E9E4D8",sig:"Um toque quente sobre a ardósia.",uso:"Botão principal sobre fundos escuros."},
+      {n:"Granito",hex:"#EEEDE9",sig:"O granito das fachadas do Porto: neutro e sólido.",uso:"Fundo principal."},
+      {n:"Tinta",hex:"#1C2329",sig:"Rigor e legibilidade.",uso:"Texto corrido e títulos."}],
+    prop:[["Granito","#EEEDE9",60,"#1C2329"],["Ardósia","#1E2A35",30,"#F3F2EE"],["Azul Douro","#2F5F8F",10,"#FFFFFF"]],
+    pairs:[["Tinta","#1C2329","Granito","#EEEDE9"],["Cinzento de texto","#55606A","Granito","#EEEDE9"],["Azul Douro escuro","#24507C","Granito","#EEEDE9"],["Azul Douro","#2F5F8F","Branco","#FFFFFF"],["Pedra clara","#E9E4D8","Ardósia","#1E2A35"],["Cinzento claro","#AEB9C4","Ardósia","#1E2A35"]],
+    type:[
+      {role:"Nome e títulos",fam:"Schibsted Grotesk",w:"Pesos 600 e 700",why:"Grotesca contemporânea, firme e compacta. Lê-se bem em tamanhos grandes e dá um tom atual e direto.",fb:"Word e email: Arial em negrito ou Segoe UI Semibold.",cls:"s-display",txt:"Contas que qualquer condómino consegue ler"},
+      {role:"Mote",fam:"Schibsted Grotesk itálico",w:"Peso 500",why:"O mesmo tipo de letra em itálico mantém o mote dentro da família, sem mudar de tom.",fb:"Word e email: Arial itálico.",cls:"s-italic",txt:"Ligamos pessoas. Cuidamos do património."},
+      {role:"Texto, etiquetas e formulários",fam:"IBM Plex Sans",w:"Pesos 400, 500 e 600",why:"Humanista, desenhada para documentos técnicos. Os algarismos são muito claros, o que ajuda nos relatórios.",fb:"Word e email: Arial ou Segoe UI.",cls:"s-body",txt:"Todos os meses cada condómino recebe o relatório de receitas e despesas, com as faturas anexas."}]
+  }
+};
+function hexRgb(h){ h=h.replace("#",""); return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16)); }
+function lum(h){ return hexRgb(h).map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);}).reduce((a,v,i)=>a+v*[0.2126,0.7152,0.0722][i],0); }
+function ratio(a,b){ const x=lum(a),y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
+function cmyk(h){ const [r,g,b]=hexRgb(h).map(v=>v/255); const k=1-Math.max(r,g,b); if(k>=1) return "0 · 0 · 0 · 100"; return [(1-r-k)/(1-k),(1-g-k)/(1-k),(1-b-k)/(1-k),k].map(v=>Math.round(v*100)).join(" · "); }
+function verdict(r){ if(r>=7) return '<span class="pill ok">AAA, qualquer texto</span>'; if(r>=4.5) return '<span class="pill ok">AA, qualquer texto</span>'; if(r>=3) return '<span class="pill mid">Só títulos grandes e gráficos</span>'; return '<span class="pill bad">Só decoração</span>'; }
+const fmt = n => n.toFixed(2).replace(".", ",");
+
+function logo(cls, d){ return `<div class="bb-logo ${cls}"><span class="w">${nome}</span><span class="r"></span><span class="d">${d||"Administração de Condomínios"}</span></div>`; }
+
+function renderBrand(){
+  const el = document.getElementById("identidade"); if (!el) return;
+  const B = BRAND[versao], N = NAMES[nome];
+  const sec = (t, sub, body) => `<section class="bb-sec"><div class="wrap"><div class="bb-head"><h3>${t}</h3>${sub?`<p>${sub}</p>`:""}</div><div class="bb-body">${body}</div></div></section>`;
+
+  const nameSec = sec("1. Nome", "Proposta de significado para o nome selecionado no painel.", `
+    <div class="bb-logo logo-pos" style="justify-items:start;text-align:left"><span class="w" style="font-size:56px;margin-right:0">${nome}</span></div>
+    <dl class="bb-name">
+      <div><dt>Origem</dt><dd>${N.orig}</dd></div>
+      <div><dt>Ideia</dt><dd>${N.ideia}</dd></div>
+      <div><dt>A ter em conta</dt><dd>${N.nota}</dd></div>
+    </dl>`);
+
+  const logoSec = sec("2. Logótipo", "Logótipo tipográfico: o nome, um filete e o descritor. Os monogramas das propostas iniciais podem juntar-se mais tarde.", `
+    <div class="logo-row">
+      <div><div class="logo-tile on-light">${logo("logo-pos")}</div><p class="cap">Versão positiva, sobre fundos claros.</p></div>
+      <div><div class="logo-tile on-dark">${logo("logo-neg")}</div><p class="cap">Versão negativa, sobre fundos escuros.</p></div>
+    </div>
+    <div class="logo-row">
+      <div><div class="logo-tile on-light"><div class="clear-box">${logo("logo-pos")}</div></div><p class="cap">Área de proteção: deixar à volta do logótipo um espaço livre igual à altura das maiúsculas do nome.</p></div>
+      <div class="rules">
+        <div><b>Tamanho mínimo</b><span>25 mm de largura impresso, 120 px em ecrã. Abaixo disso, usar só o nome sem descritor.</span></div>
+        <div><b>Descritor</b><span>"Administração de Condomínios". Com a linha Património ativa, passa a "Gestão de Património".</span></div>
+        <div><b>Cores permitidas</b><span>Só as duas versões ao lado, ou o logótipo todo numa cor de texto da paleta.</span></div>
+        <div><b>Ficheiros</b><span>Para impressão, pedir o logótipo vetorizado (SVG ou PDF) quando a versão estiver escolhida.</span></div>
+      </div>
+    </div>
+    <div class="wrong">
+      <figure><div class="logo-tile on-light no-stretch">${logo("logo-pos")}</div><figcaption><b>Não</b>esticar nem comprimir.</figcaption></figure>
+      <figure><div class="logo-tile on-light no-color">${logo("logo-pos")}</div><figcaption><b>Não</b>usar cores fora da paleta.</figcaption></figure>
+      <figure><div class="logo-tile no-contrast">${logo("logo-pos")}</div><figcaption><b>Não</b>usar sobre fundos sem contraste.</figcaption></figure>
+      <figure><div class="logo-tile on-light no-effects">${logo("logo-pos")}</div><figcaption><b>Não</b>acrescentar sombras ou efeitos.</figcaption></figure>
+    </div>`);
+
+  const sw = B.colors.map(c=>{ const [r,g,b]=hexRgb(c.hex); return `<div class="swatch"><div class="chip" style="background:${c.hex}"></div><div class="info"><b>${c.n}</b><span class="sig">${c.sig}</span><span class="codes"><span>HEX ${c.hex}</span><span>RGB ${r} · ${g} · ${b}</span><span>CMYK ${cmyk(c.hex)}</span></span><span class="uso">${c.uso}</span></div></div>`; }).join("");
+  const prop = B.prop.map(p=>`<div style="flex:${p[2]};background:${p[1]};color:${p[3]}" title="${p[0]} ${p[2]}%">${p[2] > 10 ? p[0] + " " : ""}${p[2]}%</div>`).join("");
+  const rows = B.pairs.map(p=>{ const r=ratio(p[1],p[3]); return `<tr><td><span class="aa" style="color:${p[1]};background:${p[3]};box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)">Aa</span></td><td>${p[0]} sobre ${p[2]}</td><td class="num">${fmt(r)}:1</td><td>${verdict(r)}</td></tr>`; }).join("");
+  const colorSec = sec("3. Cores", "Os valores CMYK são uma aproximação automática; confirmar com a gráfica antes de imprimir.", `
+    <div class="swatches">${sw}</div>
+    <div><div class="prop" aria-label="Proporção de uso">${prop}</div><p class="cap">Proporção de uso aproximada: fundo, cor de estrutura e cor de destaque. O texto usa a cor mais escura da paleta.</p></div>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Amostra</th><th>Combinação</th><th>Contraste</th><th>Utilização</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="cap">Contraste calculado segundo as regras de acessibilidade WCAG. O nível AA pede pelo menos 4,5:1 para texto normal e 3:1 para títulos grandes.</p>`);
+
+  const tr = B.type.map(t=>`<div class="type-row"><div class="meta"><b>${t.fam}</b><span>${t.role} · ${t.w}</span><span>${t.why}</span><span>${t.fb}</span></div><div class="sample ${t.cls}">${t.txt}${t.cls==="s-body"?'<span class="nums">0123456789 · 2.640,00 € · 24 frações</span>':""}</div></div>`).join("");
+  const typeSec = sec("4. Tipografia", "Fontes gratuitas do Google Fonts, com licença para uso comercial.", `${tr}
+    <div class="scale">
+      <div><small>Nome · 92 px</small><span class="x" style="font-family:var(--display);font-size:44px;line-height:1.1;font-weight:600">${nome}</span></div>
+      <div><small>Título · 46 px</small><span class="x" style="font-family:var(--display);font-size:32px;font-weight:600">Como mudar de administração</span></div>
+      <div><small>Subtítulo · 24 px</small><span class="x" style="font-family:var(--display);font-size:24px;font-weight:600">Proposta escrita</span></div>
+      <div><small>Texto · 17 px</small><span class="x" style="font-family:var(--body);font-size:17px">Preço fixo mensal, o que está incluído e os compromissos de serviço.</span></div>
+      <div><small>Etiqueta · 12,5 px</small><span class="x label">Compromissos escritos no contrato</span></div>
+    </div>`);
+
+  const voiceSec = sec("5. Tom de voz", "Igual nas duas versões. Tirado dos comentários dos sócios ao site.", `
+    <div class="principles">
+      <div><b>Direto e concreto</b><span>Números, prazos e passos reais. Frases curtas, sem travessões nem frases de efeito.</span></div>
+      <div><b>Próximo e humano</b><span>Falar com o condómino, na terceira pessoa e sem "você" explícito, como em "Diga-nos onde fica o edifício".</span></div>
+      <div><b>Positivo</b><span>Dizer o que fazemos, não o que os outros fazem mal. Responder "sim, também é possível" em vez de "para já não".</span></div>
+      <div><b>Para todos</b><span>Português e inglês ao mesmo nível, sem distinguir clientes por nacionalidade ou residência.</span></div>
+    </div>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Usar</th><th>Evitar</th></tr></thead><tbody>
+      <tr><td>parceiro</td><td>fornecedor</td></tr>
+      <tr><td>num dia útil</td><td>em 1 dia útil, em um dia útil</td></tr>
+      <tr><td>crescemos de forma sustentada</td><td>crescemos devagar, somos pequenos</td></tr>
+      <tr><td>recuperação de quotas, soluções amigáveis</td><td>dívidas, tribunal</td></tr>
+      <tr><td>trabalhamos em português e em inglês</td><td>clientes estrangeiros, quem não vive em Portugal</td></tr>
+      <tr><td>pequenas reparações com parceiros de confiança, consulta ao mercado para obras maiores</td><td>três orçamentos para tudo</td></tr>
+      <tr><td>sim, também é possível</td><td>para já não fazemos</td></tr>
+    </tbody></table></div>`);
+
+  const appsSec = versao === "a" ? sec("6. Aplicações", "Exemplos da identidade aplicada. Contactos fictícios.", `
+    <div class="apps">
+      <div><div class="app-h"><b>Cartão de visita</b><span>85 × 55 mm. Frente em verde com filete dourado; verso em marfim.</span></div>
+        <div class="cards">
+          <div class="bcard front">${logo("logo-neg")}</div>
+          <div class="bcard back"><div class="who"><b>[Nome Apelido]</b><span>Sócio-gerente</span></div><div></div><div><div class="ct">+351 220 000 000<br>nome@${nome.toLowerCase()}.exemplo<br>Rua do Exemplo, 100 · 4150-000 Porto</div><div class="mt">Ligamos pessoas. Cuidamos do património.</div></div></div>
+        </div></div>
+      <div><div class="app-h"><b>Assinatura de email</b><span>Usa Georgia e Arial, porque a maioria dos programas de email não carrega fontes da web.</span></div>
+        <div class="mail"><div class="mail-h"><span>Para: comissao@edificio.exemplo</span><span>Assunto: Relatório mensal de outubro</span></div>
+          <div class="mail-b"><p>Bom dia,</p><p>Segue em anexo o relatório de outubro, com as seis faturas do mês. Qualquer dúvida, estamos ao dispor.</p><p>Com os melhores cumprimentos,</p>
+            <div class="sig"><div class="wm">${nome}<small>CONDOMÍNIOS</small></div><div class="lines"><b>[Nome Apelido]</b> · Sócio-gerente<br>+351 220 000 000 · nome@${nome.toLowerCase()}.exemplo<br><i>Ligamos pessoas. Cuidamos do património.</i></div></div>
+          </div></div></div>
+      <div><div class="app-h"><b>Placa à porta</b><span>Latão escovado ou impressão sobre verde, com moldura dourada. Também serve de modelo para a placa de cada edifício administrado.</span></div>
+        <div class="wall"><div class="plate">${logo("logo-neg")}<span class="m">Ligamos pessoas. Cuidamos do património.</span><span class="floor">Escritório · 2.º andar</span></div></div></div>
+    </div>`) : sec("6. Aplicações", "", `<p class="b-only">Os exemplos de aplicação (cartão de visita, assinatura de email e placa) estão feitos para a versão A. Mude para A no painel para os ver.</p>`);
+
+  el.innerHTML = `
+    <div class="bb-bar"><div class="wrap"><span class="brand">${nome}</span><p>Manual de identidade · documento interno</p><button type="button" class="bb-close">Fechar</button></div></div>
+    <div class="bb-hero"><div class="wrap"><p class="label">Manual de identidade</p><h2 id="bb-title">${B.title}</h2><p>${B.intro} Use o painel no canto para trocar de versão ou de nome; o manual atualiza-se.</p></div></div>
+    ${nameSec}${logoSec}${colorSec}${typeSec}${voiceSec}${appsSec}<div class="bb-end"></div>`;
+  el.querySelector(".bb-close").addEventListener("click", () => setBrand(false));
+}
+let lastFocus = null;
+function setBrand(open){
+  const el = document.getElementById("identidade"), btn = document.querySelector(".sw-bb");
+  if (open) { lastFocus = document.activeElement; renderBrand(); el.hidden = false; el.scrollTop = 0; document.documentElement.style.overflow = "hidden"; el.querySelector(".bb-close").focus(); }
+  else { el.hidden = true; document.documentElement.style.overflow = ""; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  btn.setAttribute("aria-pressed", String(open));
+}
+document.querySelector(".sw-bb").addEventListener("click", () => setBrand(document.getElementById("identidade").hidden));
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !document.getElementById("identidade").hidden) setBrand(false); });
+
+// Menu em ecrãs pequenos
+const topBar = document.querySelector(".top"), menuBtn = document.querySelector(".menu-btn");
+function setMenu(open){ topBar.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", String(open)); }
+menuBtn.addEventListener("click", () => setMenu(!topBar.classList.contains("open")));
+document.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+
+applyLines();
+applyVersion();
+applyLang();
+setMode("proposta");
+if (location.hash === "#identidade") setBrand(true);
+</script>
+
+</body></html>
