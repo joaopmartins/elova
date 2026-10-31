@@ -1,4 +1,9 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>ELLUM8 Condomínios</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Administração de condomínios no Porto e em Vila Nova de Gaia. Site de demonstração.">
@@ -275,6 +280,18 @@ fieldset[aria-invalid="true"] .chip{border-color:var(--neg)}
 [data-version="b"] .mode{border-radius:8px}
 @media (max-width: 520px){ .q-row{grid-template-columns:1fr} .mode{flex-direction:column} }
 
+
+/* Abertura em duas colunas no computador */
+.hero-copy{display:grid;justify-items:center;gap:28px}
+@media (min-width: 1024px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;justify-items:stretch;text-align:left;gap:64px;padding-block:64px}
+  .hero .plaque{justify-self:center;text-align:center}
+  .hero .plaque h1{font-size:clamp(52px,5.6vw,84px)}
+  .hero-copy{justify-items:start;gap:24px}
+  .hero-intro{font-size:20px;max-width:44ch}
+  .hero-ctas{justify-content:flex-start}
+  [data-version="b"] .hero .plaque{justify-self:start;text-align:left}
+}
 /* Símbolo ELLUM8 e algarismos alinhados no nome */
 .nm,.brand,.bb-logo .w,.plaque h1,.sig .wm{font-variant-numeric:lining-nums}
 .mark{display:block;color:var(--plaque-gold);line-height:0}
@@ -480,6 +497,10 @@ footer a:hover{color:var(--on-band)}
 .b-only{border:1px dashed var(--line);padding:20px;color:var(--muted)}
 .switcher{z-index:50}
 </style>
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
 
 <header class="top">
   <div class="wrap">
@@ -512,12 +533,14 @@ footer a:hover{color:var(--on-band)}
         <div class="rule" aria-hidden="true"></div>
         <p class="motto" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
       </div>
+      <div class="hero-copy">
       <p class="hero-intro" data-i18n="heroIntro">Administramos condomínios no Porto e em Vila Nova de Gaia. As contas estão abertas a todos os condóminos, os pedidos têm resposta num dia útil e cada edifício tem um gestor que o conhece.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-gold" href="#contacto" data-i18n="cta">Pedir proposta</a>
-        <a class="btn btn-line" href="#mudar" data-i18n="cta2">Como mudar de administração</a>
+        <div class="hero-ctas">
+          <a class="btn btn-gold" href="#contacto" data-i18n="cta">Pedir proposta</a>
+          <a class="btn btn-line" href="#mudar" data-i18n="cta2">Como mudar de administração</a>
+        </div>
+        <p class="hero-place">Porto · Vila Nova de Gaia</p>
       </div>
-      <p class="hero-place">Porto · Vila Nova de Gaia</p>
     </div>
   </section>
 
@@ -1308,4 +1331,5 @@ setMode("proposta");
 if (location.hash === "#identidade") setBrand(true);
 </script>
 
-</body></html>
+</body>
+</html>
