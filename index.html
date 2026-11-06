@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<title>ELLUM8 Condomínios</title>
+<title>CONDIGNO Condomínios</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Administração de condomínios no Porto e em Vila Nova de Gaia. Site de demonstração.">
+<meta name="description" content="Administração de condomínios no Grande Porto. Site de demonstração.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600&family=Schibsted+Grotesk:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -303,6 +303,27 @@ fieldset[aria-invalid="true"] .chip{border-color:var(--neg)}
   .hero .plaque h1{font-size:min(84px, calc(100cqi / (var(--len) * 0.86)))}
   [data-version="b"] .hero .plaque h1{font-size:min(96px, calc(100cqi / (var(--len) * 0.74)))}
 }
+/* Compromisso único e serviços condensados */
+.pledge{display:grid;justify-items:center;text-align:center;gap:12px;padding-block:12px}
+.pledge-rule{width:48px;height:1px;background:var(--accent)}
+.pledge-t{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.12;color:var(--band);text-wrap:balance;max-width:22ch}
+.pledge-s{color:var(--muted);max-width:52ch}
+[data-version="b"] .pledge{justify-items:start;text-align:left}
+[data-version="b"] .pledge-rule{height:3px}
+[data-version="b"] .pledge-t{color:var(--fg);font-weight:600;letter-spacing:-.02em}
+.svc + .fee-cta{margin-top:4px}
+.side{display:grid;gap:16px;align-content:start}
+.svc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.svc > div{border-top:1px solid var(--accent);padding-top:16px;display:grid;gap:8px;align-content:start}
+.svc h3{font-size:22px}
+.svc p{color:var(--muted);font-size:15.5px}
+[data-version="b"] .svc > div{border-top:3px solid var(--accent)}
+[data-version="b"] .svc h3{font-size:19px}
+.call{color:var(--fg)}
+.call b{font-variant-numeric:tabular-nums;user-select:all}
+@media (max-width: 1000px){ .svc{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width: 520px){ .svc{grid-template-columns:1fr} }
+
 /* Símbolo ELLUM8 e algarismos alinhados no nome */
 .nm,.brand,.bb-logo .w,.plaque h1,.sig .wm{font-variant-numeric:lining-nums}
 .mark{display:block;color:var(--plaque-gold);line-height:0}
@@ -515,13 +536,11 @@ footer a:hover{color:var(--on-band)}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand nm" href="#inicio">ELLUM8</a>
+    <a class="brand nm" href="#inicio">CONDIGNO</a>
     <nav class="nav" id="nav-main" aria-label="Principal">
       <a href="#servicos" data-i18n="nav1">Serviços</a>
-      <a href="#honorarios" data-i18n="nav6">Honorários</a>
       <a href="#transparencia" data-i18n="nav2">Transparência</a>
       <a href="#mudar" data-i18n="nav3">Como mudar</a>
-      <a href="#zona" data-i18n="nav4">Zona</a>
       <a href="#perguntas" data-i18n="nav5">Perguntas</a>
       <a href="#contacto" class="nav-cta" data-i18n="cta">Pedir proposta</a>
     </nav>
@@ -539,33 +558,28 @@ footer a:hover{color:var(--on-band)}
     <div class="wrap">
       <div class="plaque">
         <span class="mark" aria-hidden="true"></span>
-        <h1 class="nm">ELLUM8</h1>
+        <h1 class="nm">CONDIGNO</h1>
         <p class="sub" data-i18n="sub">Administração de Condomínios</p>
         <div class="rule" aria-hidden="true"></div>
         <p class="motto" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
       </div>
       <div class="hero-copy">
-      <p class="hero-intro" data-i18n="heroIntro">Administramos condomínios no Porto e em Vila Nova de Gaia. As contas estão abertas a todos os condóminos, os pedidos têm resposta num dia útil e cada edifício tem um gestor que o conhece.</p>
+      <p class="hero-intro" data-i18n="heroIntro">Administramos um conjunto de condomínios no Grande Porto. As contas são claras e cada edifício tem um gestor que o conhece.</p>
         <div class="hero-ctas">
           <a class="btn btn-gold" href="#contacto" data-i18n="cta">Pedir proposta</a>
           <a class="btn btn-line" href="#mudar" data-i18n="cta2">Como mudar de administração</a>
         </div>
-        <p class="hero-place">Porto · Vila Nova de Gaia</p>
+        <p class="hero-place" data-i18n="place">Grande Porto</p>
       </div>
     </div>
   </section>
 
-  <section class="commit" aria-labelledby="commit-t">
+  <section class="commit" aria-labelledby="pledge-t">
     <div class="wrap">
-      <div class="commit-head">
-        <p class="label" id="commit-t" data-i18n="commitT">Compromissos escritos no contrato</p>
-        <span class="demo-note" data-i18n="commitNote">Proposta de compromissos, a validar</span>
-      </div>
-      <div class="commit-grid">
-        <div><h3 data-i18n="c1t">Conta em nome do condomínio</h3><p data-i18n="c1">O dinheiro fica numa conta bancária em nome do condomínio. A comissão de condóminos pode ter acesso de consulta.</p></div>
-        <div><h3 data-i18n="c2t">Relatório todos os meses</h3><p data-i18n="c2">Receitas, despesas, quotas em atraso e fundo de reserva, com as faturas anexas. Enviado até ao dia 10.</p></div>
-        <div><h3 data-i18n="c3t">Resposta num dia útil</h3><p data-i18n="c3">Todos os pedidos têm resposta no dia útil seguinte e acompanhamento até estarem resolvidos.</p></div>
-        <div><h3 data-i18n="c4t">Obras com propostas comparadas</h3><p data-i18n="c4">As pequenas reparações são resolvidas com a nossa rede de parceiros de confiança. Para obras de maior dimensão, consultamos o mercado e apresentamos várias propostas lado a lado.</p></div>
+      <div class="pledge">
+        <span class="pledge-rule" aria-hidden="true"></span>
+        <p class="pledge-t" id="pledge-t" data-i18n="pledge">Cada edifício tem um gestor que o conhece.</p>
+        <p class="pledge-s" data-i18n="pledgeS">Um contacto direto, que acompanha o dia a dia do prédio.</p>
       </div>
     </div>
   </section>
@@ -578,52 +592,33 @@ footer a:hover{color:var(--on-band)}
       </div>
       <div class="sec-body">
         <div class="prose">
-          <p data-i18n="about1">Somos dois sócios e, entre nós, trazemos mais de 10 anos de experiência no setor. Hoje administramos 8 condomínios no Porto e em Gaia.</p>
-          <p data-i18n="about2">Sabemos o que os condóminos mais valorizam: contas claras, respostas rápidas e obras bem acompanhadas. Crescemos de forma sustentada e assumimos novos edifícios quando lhes podemos dar o mesmo acompanhamento que damos aos atuais.</p>
-          <p data-i18n="about3">Trabalhamos em português e em inglês, do atendimento diário às assembleias.</p>
+          <p data-i18n="about1">Empresa recém-fundada, assente na experiência sólida da equipa em administração de condomínios.</p>
+          <p data-i18n="about2">Administramos um conjunto de condomínios no Grande Porto e crescemos de forma sustentada.</p>
         </div>
         <dl class="facts">
-          <div><dt>10+</dt><dd data-i18n="f1">anos de experiência no setor</dd></div>
-          <div><dt>8</dt><dd data-i18n="f2">condomínios administrados no Porto e em Gaia</dd></div>
-          <div><dt>PT · EN</dt><dd data-i18n="f3">atendimento, relatórios e assembleias nas duas línguas</dd></div>
+          <div><dt>10+</dt><dd data-i18n="f1">anos de experiência da equipa</dd></div>
+          <div><dt data-i18n="f2t">Grande Porto</dt><dd data-i18n="f2">área de atuação</dd></div>
+          <div><dt>PT · EN</dt><dd data-i18n="f3">atendimento e assembleias nas duas línguas</dd></div>
         </dl>
       </div>
     </div>
   </section>
 
   <section class="sec" id="servicos" aria-labelledby="serv-t">
-    <div class="wrap">
+    <div class="wrap wide">
       <div class="sec-head">
         <p class="label" data-i18n="servL">Serviços</p>
         <h2 id="serv-t" data-i18n="servT">O que fazemos</h2>
-        <p data-i18n="servP">Tudo o que um condomínio precisa no dia a dia, com uma só equipa e um só contacto.</p>
       </div>
       <div class="sec-body">
-        <ul class="services">
-          <li><h3 data-i18n="s1t">Administração do condomínio</h3><ul data-i18n="s1"><li>Gestão corrente das partes comuns</li><li>Contratos de limpeza, elevadores e jardinagem, revistos todos os anos</li><li>Seguros obrigatórios e participação de sinistros</li></ul></li>
-          <li><h3 data-i18n="s2t">Gestão financeira e contas</h3><ul data-i18n="s2"><li>Orçamento anual por fração, de acordo com a permilagem</li><li>Cobrança de quotas e gestão de pagamentos</li><li>Fundo comum de reserva em conta própria e relatório mensal</li></ul></li>
-          <li><h3 data-i18n="s3t">Manutenção e obras</h3><ul data-i18n="s3"><li>Visita técnica a cada edifício pelo menos uma vez por trimestre</li><li>Pequenas reparações resolvidas com parceiros de confiança</li><li>Consulta ao mercado e comparação de propostas para obras de maior dimensão</li><li>Acompanhamento da obra até à receção e durante a garantia</li></ul></li>
-          <li><h3 data-i18n="s4t">Assembleias e atas</h3><ul data-i18n="s4"><li>Convocatória com ordem de trabalhos e documentos em anexo</li><li>Condução da assembleia, presencial ou por videoconferência</li><li>Ata enviada a todos os condóminos em 10 dias</li></ul></li>
-          <li><h3 data-i18n="s5t">Apoio jurídico</h3><ul data-i18n="s5"><li>Recuperação de quotas em atraso, dando prioridade a soluções amigáveis</li><li>Revisão e atualização do regulamento do condomínio</li><li>Acompanhamento por advogados parceiros especializados em propriedade horizontal</li></ul></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="honorarios" aria-labelledby="fee-t">
-    <div class="wrap wide">
-      <div class="sec-head">
-        <p class="label" data-i18n="feeL">Honorários</p>
-        <h2 id="fee-t" data-i18n="feeT">Um orçamento à medida de cada condomínio</h2>
-        <p data-i18n="feeP">Os honorários são um valor mensal por fração, ajustado às necessidades de cada condomínio. Em edifícios maiores o valor por fração é mais baixo; em edifícios mais pequenos é um pouco mais alto, para garantir o mesmo acompanhamento.</p>
-      </div>
-      <div class="sec-body">
-        <div class="fees">
-          <div class="fee-factors"><h3 data-i18n="facT">O que faz variar o valor</h3><ul data-i18n="facL"><li>Número de frações</li><li>Elevadores e garagem</li><li>Piscina, jardins ou portaria</li><li>Estado de conservação do edifício</li></ul></div>
-          <div class="fee-factors"><h3 data-i18n="incT">Incluído na mensalidade</h3><ul data-i18n="incL"><li>Administração corrente e seguros</li><li>Cobrança de quotas</li><li>Contas e relatório mensal com faturas</li><li>Assembleia anual e ata</li><li>Visita técnica trimestral</li><li>Pequenas reparações com parceiros de confiança</li><li>Linha de urgências</li></ul></div>
+        <div class="svc">
+          <div><h3 data-i18n="s1t">Gestor dedicado</h3><p data-i18n="s1">Um contacto direto, que conhece o edifício.</p></div>
+          <div><h3 data-i18n="s3t">Manutenção e obras</h3><p data-i18n="s3">Pequenas reparações com parceiros e consulta ao mercado para obras maiores.</p></div>
+          <div><h3 data-i18n="s4t">Assembleias flexíveis</h3><p data-i18n="s4">Presenciais ou por videoconferência, em português ou inglês.</p></div>
+          <div><h3 data-i18n="s5t">Parceiros de confiança</h3><p data-i18n="s5">Limpeza e manutenção técnica. Trabalhamos com parceiros para apoio jurídico.</p></div>
         </div>
         <div class="fee-cta">
-          <p data-i18n="feeCta">Depois de uma primeira conversa e da visita ao edifício, enviamos uma proposta com o valor, o que está incluído e o que fica fora da mensalidade.</p>
+          <p data-i18n="feeCta">Apresentamos um orçamento ajustado às necessidades de cada condomínio.</p>
           <a class="btn btn-band" href="#contacto" data-i18n="cta">Pedir proposta</a>
         </div>
       </div>
@@ -633,40 +628,39 @@ footer a:hover{color:var(--on-band)}
   <section class="sec" id="transparencia" aria-labelledby="val-t">
     <div class="wrap wide">
       <div class="sec-head">
-        <p class="label" data-i18n="valL">Porque nós</p>
-        <h2 id="val-t" data-i18n="valT">Contas que qualquer condómino consegue ler</h2>
-        <p data-i18n="valP">A transparência é o que os condóminos mais valorizam numa administração. É nela que pomos mais cuidado.</p>
+        <p class="label" data-i18n="valL">Transparência</p>
+        <h2 id="val-t" data-i18n="valT">Contas claras e disponibilidade</h2>
       </div>
       <div class="sec-body">
         <div class="transp">
           <div class="prose">
-            <p class="label" data-i18n="v1l">Transparência</p>
-            <h3 data-i18n="v1t">Sabe sempre quanto entrou, quanto saiu e porquê</h3>
-            <p data-i18n="v1a">Todos os meses cada condómino recebe um relatório como este, com as faturas anexas. Os números são os da conta bancária em nome do condomínio.</p>
-            <p data-i18n="v1b">Cada variação vem explicada. As quotas em atraso e os pedidos em aberto também aparecem, sem identificar condóminos.</p>
+            <p class="label" data-i18n="v1l">Como gerimos o dinheiro</p>
+            <h3 data-i18n="v1t">Numa conta bancária em nome do condomínio.</h3>
+            <p data-i18n="v1a">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida sobre a gestão do seu condomínio.</p>
+            <p data-i18n="v1b">Quem o pedir recebe um extrato trimestral, como este exemplo.</p>
           </div>
-          <figure class="report" style="margin:0" aria-label="Exemplo de relatório mensal">
+          <figure class="report" style="margin:0" aria-label="Exemplo de extrato trimestral">
             <div class="report-head">
-              <div class="row1"><strong data-i18n="r0">Relatório mensal · outubro 2026</strong><span class="tag" data-i18n="rEx">Valores fictícios</span></div>
-              <span data-i18n="r1">Edifício Exemplo, Foz do Douro · 24 frações</span>
+              <div class="row1"><strong data-i18n="r0">Extrato trimestral · 3.º trimestre 2026</strong><span class="tag" data-i18n="rEx">Valores fictícios</span></div>
+              <span data-i18n="r1">Edifício Exemplo, Foz do Douro · 24 frações · julho a setembro</span>
             </div>
             <table>
               <thead><tr><th data-i18n="rRec">Receitas</th><th></th></tr></thead>
               <tbody>
-                <tr><td data-i18n="r2">Quotas emitidas</td><td>2.880,00 €</td></tr>
-                <tr><td data-i18n="r3">Quotas cobradas</td><td>2.640,00 €</td></tr>
+                <tr><td data-i18n="r2">Quotas emitidas</td><td>8.640,00 €</td></tr>
+                <tr><td data-i18n="r3">Quotas cobradas</td><td>8.520,00 €</td></tr>
               </tbody>
               <thead><tr><th data-i18n="rDesp">Despesas</th><th></th></tr></thead>
               <tbody>
-                <tr><td data-i18n="r4">Limpeza das partes comuns</td><td>620,00 €</td></tr>
-                <tr><td data-i18n="r5">Eletricidade das partes comuns</td><td>214,37 €</td></tr>
-                <tr><td data-i18n="r6">Manutenção dos elevadores</td><td>185,00 €</td></tr>
-                <tr><td data-i18n="r7">Seguro multirriscos (1/12)</td><td>142,50 €</td></tr>
-                <tr><td data-i18n="r8">Honorários de administração</td><td>360,00 €</td></tr>
-                <tr><td data-i18n="r9">Pintura da escadaria (2.ª prestação de 3)</td><td>950,00 €</td></tr>
-                <tr class="total"><td data-i18n="r10">Total de despesas</td><td>2.471,87 €</td></tr>
-                <tr><td data-i18n="r11">Transferência para o fundo comum de reserva</td><td>264,00 €</td></tr>
-                <tr class="total"><td data-i18n="r12">Resultado do mês</td><td class="neg">−95,87 €</td></tr>
+                <tr><td data-i18n="r4">Limpeza das partes comuns</td><td>1.860,00 €</td></tr>
+                <tr><td data-i18n="r5">Eletricidade das partes comuns</td><td>655,42 €</td></tr>
+                <tr><td data-i18n="r6">Manutenção dos elevadores</td><td>555,00 €</td></tr>
+                <tr><td data-i18n="r7">Seguro multirriscos (3/12)</td><td>427,50 €</td></tr>
+                <tr><td data-i18n="r8">Honorários de administração</td><td>1.080,00 €</td></tr>
+                <tr><td data-i18n="r9">Pintura da escadaria (3 prestações)</td><td>2.850,00 €</td></tr>
+                <tr class="total"><td data-i18n="r10">Total de despesas</td><td>7.427,92 €</td></tr>
+                <tr><td data-i18n="r11">Transferência para o fundo comum de reserva</td><td>864,00 €</td></tr>
+                <tr class="total"><td data-i18n="r12">Resultado do trimestre</td><td>228,08 €</td></tr>
               </tbody>
             </table>
             <div class="report-foot">
@@ -674,16 +668,15 @@ footer a:hover{color:var(--on-band)}
               <div><small data-i18n="r14">Fundo comum de reserva</small><b>18.904,00 €</b></div>
             </div>
             <div class="report-notes">
-              <span data-i18n="r15">Quotas em atraso: 2 frações, 240,00 €. Lembrete enviado a 5 de outubro.</span>
-              <span data-i18n="r16">Pedidos dos condóminos: 7 recebidos, 7 respondidos num dia útil.</span>
-              <span data-i18n="r17">Anexos: 6 faturas em PDF.</span>
+              <span data-i18n="r15">Quotas em atraso: 1 fração, 120,00 €.</span>
+              <span data-i18n="r17">Anexos: 19 faturas em PDF.</span>
             </div>
           </figure>
         </div>
         <div class="value-list">
-          <div><p class="label" data-i18n="v2l">Competência</p><p data-i18n="v2">Conhecemos a lei da propriedade horizontal, os parceiros da zona e as necessidades de cada tipo de edifício, do prédio antigo da Baixa ao condomínio novo com garagem e piscina.</p></div>
-          <div><p class="label" data-i18n="v3l">Nível</p><p data-i18n="v3">Edifícios de qualidade pedem parceiros de qualidade e atenção ao pormenor: entradas cuidadas, jardins tratados, partes comuns que valorizam o imóvel.</p></div>
-          <div><p class="label" data-i18n="v4l">Rigor</p><p data-i18n="v4">Prazos cumpridos, decisões da assembleia executadas e registadas, documentos guardados e disponíveis quando são pedidos.</p></div>
+          <div><p class="label" data-i18n="v2l">Competência</p><p data-i18n="v2">Conhecemos a lei e as necessidades de cada tipo de edifício.</p></div>
+          <div><p class="label" data-i18n="v3l">Nível</p><p data-i18n="v3">Atenção ao pormenor nas partes comuns, que valorizam o imóvel.</p></div>
+          <div><p class="label" data-i18n="v4l">Rigor</p><p data-i18n="v4">Decisões da assembleia executadas e registadas em ata.</p></div>
         </div>
       </div>
     </div>
@@ -694,33 +687,17 @@ footer a:hover{color:var(--on-band)}
       <div class="sec-head">
         <p class="label" data-i18n="stepL">Como trabalhamos</p>
         <h2 id="step-t" data-i18n="stepT">Como mudar de administração</h2>
-        <p data-i18n="stepP">É um processo simples. Tratamos da parte burocrática e o dia a dia do prédio continua normalmente.</p>
+        <p data-i18n="stepP">Trabalhamos com edifícios de qualquer dimensão.</p>
+        <span class="demo-note" data-i18n="tbc">Texto a confirmar</span>
       </div>
       <div class="sec-body">
         <ol class="steps">
-          <li><h3 data-i18n="st1t">Conversa e visita ao edifício</h3><p data-i18n="st1">Ouvimos a comissão ou os condóminos interessados e visitamos as partes comuns. A visita é gratuita.</p></li>
-          <li><h3 data-i18n="st2t">Proposta escrita</h3><p data-i18n="st2">O valor por fração, o que está incluído e os compromissos de serviço.</p></li>
-          <li><h3 data-i18n="st3t">Decisão em assembleia</h3><p data-i18n="st3">A assembleia de condóminos aprova a nova administração. Ajudamos a preparar a convocatória e a ordem de trabalhos.</p></li>
-          <li><h3 data-i18n="st4t">Passagem de pasta</h3><p data-i18n="st4">Pedimos à administração anterior toda a documentação: atas, contas, contratos, apólices e chaves. Conferimos tudo e enviamos-lhe um resumo do que recebemos.</p></li>
-          <li><h3 data-i18n="st5t">Primeiro relatório e plano para o ano</h3><p data-i18n="st5">No primeiro mês recebe o estado das contas e um plano de manutenção com prioridades e custos estimados.</p></li>
+          <li><h3 data-i18n="st1t">Reunião</h3><p data-i18n="st1">Reunião com a comissão ou os condóminos e eventual visita ao edifício.</p></li>
+          <li><h3 data-i18n="st2t">Proposta</h3><p data-i18n="st2">A proposta descreve o que fazemos e o valor que acrescentamos.</p></li>
+          <li><h3 data-i18n="st3t">Decisão em assembleia</h3><p data-i18n="st3">A assembleia de condóminos aprova a nova administração.</p></li>
+          <li><h3 data-i18n="st4t">Passagem de pasta</h3><p data-i18n="st4">Validamos a passagem de pasta, confirmamos o acesso à conta bancária e comunicamos a mudança aos fornecedores.</p></li>
+          <li><h3 data-i18n="st5t">Plano para o primeiro ano</h3><p><span class="demo-note" data-i18n="st5">Texto a enviar pelos sócios</span></p></li>
         </ol>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="zona" aria-labelledby="zone-t">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="label" data-i18n="zoneL">Zona de atuação</p>
-        <h2 id="zone-t" data-i18n="zoneT">Porto e Vila Nova de Gaia</h2>
-        <p data-i18n="zoneP">Concentramo-nos nas duas margens do Douro, perto dos edifícios que administramos. Chegamos a qualquer um deles em menos de 30 minutos.</p>
-      </div>
-      <div class="sec-body">
-        <div class="cities">
-          <div class="city"><h3>Porto</h3><p>Foz do Douro · Nevogilde · Aldoar · Boavista · Lordelo do Ouro · <span data-i18n="zBaixa">Baixa</span></p></div>
-          <div class="city"><h3>Vila Nova de Gaia</h3><p>Canidelo · Santa Marinha · Mafamude · Madalena · Arcozelo · Miramar</p></div>
-        </div>
-        <p class="zone-more" data-i18n="zMore">Tem um edifício noutra zona do Grande Porto? Fale connosco.</p>
       </div>
     </div>
   </section>
@@ -733,8 +710,8 @@ footer a:hover{color:var(--on-band)}
       </div>
       <div class="sec-body">
         <div class="quotes">
-          <figure class="quote"><span class="tag" data-i18n="qFic">Testemunho fictício</span><blockquote data-i18n="q1">Recebemos todos os meses o relatório com as faturas. Na última assembleia as contas foram aprovadas em dez minutos, porque todos já as conheciam.</blockquote><figcaption data-i18n="qA1">Ana M., comissão de condóminos, Boavista</figcaption></figure>
-          <figure class="quote"><span class="tag" data-i18n="qFic">Testemunho fictício</span><blockquote data-i18n="q2">Trataram de toda a mudança de administração e, no primeiro mês, já tínhamos um plano de obras para três anos. Cada pedido tem resposta no próprio dia.</blockquote><figcaption data-i18n="qA2">James R., proprietário, Foz do Douro</figcaption></figure>
+          <figure class="quote"><span class="tag" data-i18n="qFic">Testemunho fictício</span><blockquote data-i18n="q1">Sempre que temos uma dúvida sobre as contas, temos resposta. A última assembleia correu sem surpresas.</blockquote><figcaption data-i18n="qA1">Ana M., comissão de condóminos, Boavista</figcaption></figure>
+          <figure class="quote"><span class="tag" data-i18n="qFic">Testemunho fictício</span><blockquote data-i18n="q2">Acompanharam toda a mudança de administração. Desde o início, tivemos sempre alguém disponível.</blockquote><figcaption data-i18n="qA2">James R., proprietário, Foz do Douro</figcaption></figure>
         </div>
       </div>
     </div>
@@ -748,14 +725,12 @@ footer a:hover{color:var(--on-band)}
       </div>
       <div class="sec-body">
         <div class="faq">
-          <details><summary data-i18n="fq1">Quanto custa?</summary><p data-i18n="fa1">Cobramos um valor mensal por fração. O valor por fração desce à medida que o edifício tem mais frações e ajusta-se às suas características, como elevadores, garagem ou piscina. Depois da visita enviamos uma proposta com o valor, o que está incluído e o que fica fora da mensalidade.</p></details>
-          <details><summary data-i18n="fq2">Podemos mudar de administração a meio do mandato?</summary><p data-i18n="fa2">A assembleia de condóminos pode eleger uma nova administração. Explicamos os passos e ajudamos a preparar a convocatória e a ordem de trabalhos.</p></details>
-          <details><summary data-i18n="fq3">O que acontece à documentação da administração anterior?</summary><p data-i18n="fa3">A administração cessante entrega toda a documentação do condomínio. Tratamos do pedido, recebemos os documentos e fazemos o inventário do que foi recebido.</p></details>
-          <details><summary data-i18n="fq4">Como acompanho as contas do meu condomínio?</summary><p data-i18n="fa4">Recebe por email, todos os meses, o relatório de receitas e despesas com as faturas anexas. Pode pedir qualquer outro documento e enviamo-lo no dia útil seguinte.</p></details>
-          <details><summary data-i18n="fq5">Em que línguas trabalham?</summary><p data-i18n="fa5">Em português e em inglês: atendimento, relatórios e assembleias. Quem não puder estar presente pode participar nas assembleias por videoconferência.</p></details>
-          <details><summary data-i18n="fq6">O que é o fundo comum de reserva?</summary><p data-i18n="fa6">É o dinheiro guardado para obras de conservação das partes comuns. Cada condómino contribui com pelo menos 10% da sua quota. Mantemo-lo numa conta própria e o saldo aparece em todos os relatórios.</p></details>
-          <details><summary data-i18n="fq7">Há apoio fora do horário de expediente?</summary><p data-i18n="fa7">Sim, temos uma linha de urgências disponível fora do horário. Contactamos de imediato o parceiro adequado e informamos os condóminos do que foi feito.</p></details>
-          <details><summary data-i18n="fq8">Fazem também gestão de imóveis?</summary><p data-i18n="fa8">Sim, também é possível. Gerimos imóveis de proprietários, do arrendamento à manutenção, numa área que vai ter marca própria: <span class="nm">ELLUM8</span> Património.</p></details>
+          <details><summary data-i18n="fq1">Quanto custa?</summary><p data-i18n="fa1">Depois de uma reunião, apresentamos um orçamento ajustado às necessidades do condomínio.</p></details>
+          <details><summary data-i18n="fq2">Podemos mudar de administração a meio do mandato?</summary><p data-i18n="fa2">Sim. A mudança é decidida pela assembleia de condóminos e acompanhamos todo o processo.</p></details>
+          <details><summary data-i18n="fq4">Como acompanho as contas do meu condomínio?</summary><p data-i18n="fa4">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida. Também pode pedir um extrato trimestral.</p></details>
+          <details><summary data-i18n="fq5">Em que línguas trabalham?</summary><p data-i18n="fa5">Em português e em inglês, incluindo nas assembleias.</p></details>
+          <details><summary data-i18n="fq7">Há apoio fora do horário de expediente?</summary><p data-i18n="fa7">Sim. Depois das 17h, temos um número para urgências.</p></details>
+          <details><summary data-i18n="fq8">Fazem também gestão de imóveis?</summary><p data-i18n="fa8">Sim, também é possível, numa área própria: <span class="nm">CONDIGNO</span> Património.</p></details>
         </div>
       </div>
     </div>
@@ -763,7 +738,7 @@ footer a:hover{color:var(--on-band)}
 
   <section class="future" data-linha="patrimonio" hidden>
     <div class="wrap">
-      <h2><span class="nm">ELLUM8</span> Património</h2>
+      <h2><span class="nm">CONDIGNO</span> Património</h2>
       <p data-i18n="futP">Gestão de imóveis para proprietários que preferem delegar o dia a dia: arrendamento, manutenção, impostos e contas, com o mesmo relatório mensal.</p>
     </div>
   </section>
@@ -773,36 +748,22 @@ footer a:hover{color:var(--on-band)}
       <div class="sec-head">
         <p class="label" data-i18n="ctL">Contacto</p>
         <h2 id="ct-t" data-i18n="ctT">Fale connosco</h2>
-        <p data-i18n="ctP">Conte-nos um pouco sobre o edifício. Ligamos-lhe no dia útil seguinte para marcar uma conversa e a visita.</p>
+        <p data-i18n="ctP">Entramos em contacto em 48 horas para marcar uma reunião e uma eventual visita ao edifício.</p>
       </div>
       <div class="sec-body">
         <div class="contact">
           <form id="form" novalidate>
-            <fieldset class="mode full">
-              <legend class="sr" data-i18n="modeL">O que pretende</legend>
-              <label class="seg" for="m-prop"><input type="radio" name="mode" value="proposta" id="m-prop" checked><span data-i18n="modeP">Pedir proposta</span></label>
-              <label class="seg" for="m-perg"><input type="radio" name="mode" value="pergunta" id="m-perg"><span data-i18n="modeQ">Fazer uma pergunta</span></label>
-            </fieldset>
             <div class="field"><label for="f-name" data-i18n="lName">Nome</label><input id="f-name" name="name" autocomplete="name"></div>
             <div class="field"><label for="f-email" data-i18n="lEmail">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
-            <div class="field" data-only="proposta"><label for="f-phone" data-i18n="lPhone2">Telefone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
-            <div class="field" data-only="proposta"><label for="f-role" data-i18n="lRole2">Relação com o edifício</label>
-              <select id="f-role" name="role">
-                <option data-i18n="o1">Condómino</option>
-                <option data-i18n="o2">Membro da comissão de condóminos</option>
-                <option data-i18n="o3">Administrador atual</option>
-                <option data-i18n="o5">Promotor de um edifício novo</option>
-                <option data-i18n="o6">Investidor com várias frações</option>
-                <option data-i18n="o4">Outro</option>
-              </select></div>
-            <div class="field full" data-only="proposta"><label for="f-zone" data-i18n="lZone">Zona do edifício</label>
+            <div class="field"><label for="f-phone" data-i18n="lPhone2">Telefone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="f-zone" data-i18n="lZone">Concelho</label>
               <select id="f-zone" name="zone">
-                <option value="" data-i18n="zSel">Escolha a zona</option>
-                <optgroup label="Porto"><option>Foz do Douro</option><option>Nevogilde</option><option>Aldoar</option><option>Boavista</option><option>Lordelo do Ouro</option><option>Baixa</option><option value="porto-outra" data-i18n="zOtherP">Outra zona do Porto</option></optgroup>
-                <optgroup label="Vila Nova de Gaia"><option>Canidelo</option><option>Santa Marinha</option><option>Mafamude</option><option>Madalena</option><option>Arcozelo</option><option>Miramar</option><option value="gaia-outra" data-i18n="zOtherG">Outra zona de Gaia</option></optgroup>
-                <option value="outra" data-i18n="zOther">Outra zona do Grande Porto</option>
+                <option value="" data-i18n="zSel">Escolha o concelho</option>
+                <option>Espinho</option><option>Gondomar</option><option>Maia</option><option>Matosinhos</option><option>Porto</option>
+                <option>Póvoa de Varzim</option><option>Valongo</option><option>Vila do Conde</option><option>Vila Nova de Gaia</option>
+                <option value="outro" data-i18n="zOther">Outro</option>
               </select></div>
-            <fieldset class="field full q" data-only="proposta" id="f-units">
+            <fieldset class="field full q" id="f-units">
               <legend data-i18n="lUnits">Número de frações</legend>
               <div class="chips">
                 <label class="chip"><input type="radio" name="units" value="ate10"><span data-i18n="u1">Até 10</span></label>
@@ -811,65 +772,23 @@ footer a:hover{color:var(--on-band)}
                 <label class="chip"><input type="radio" name="units" value="60+"><span data-i18n="u4">Mais de 60</span></label>
               </div>
             </fieldset>
-            <fieldset class="more full" data-only="proposta">
-              <legend><span data-i18n="moreT">Ajude-nos a preparar a conversa</span> <span class="opt" data-i18n="opt">Opcional</span></legend>
-              <div class="q"><p class="q-l" data-i18n="qFeat">Características do edifício</p><div class="chips">
-                <label class="chip"><input type="checkbox" name="feat" value="elevadores"><span data-i18n="ft1">Elevadores</span></label>
-                <label class="chip"><input type="checkbox" name="feat" value="garagem"><span data-i18n="ft2">Garagem</span></label>
-                <label class="chip"><input type="checkbox" name="feat" value="piscina"><span data-i18n="ft3">Piscina</span></label>
-                <label class="chip"><input type="checkbox" name="feat" value="jardins"><span data-i18n="ft4">Jardins</span></label>
-                <label class="chip"><input type="checkbox" name="feat" value="portaria"><span data-i18n="ft5">Portaria</span></label>
-                <label class="chip"><input type="checkbox" name="feat" value="lojas"><span data-i18n="ft6">Lojas no rés-do-chão</span></label>
-              </div></div>
-              <div class="q"><p class="q-l" data-i18n="qAge">Idade aproximada do edifício</p><div class="chips">
-                <label class="chip"><input type="radio" name="age" value="0-5"><span data-i18n="ag1">Menos de 5 anos</span></label>
-                <label class="chip"><input type="radio" name="age" value="5-20"><span data-i18n="ag2">5 a 20 anos</span></label>
-                <label class="chip"><input type="radio" name="age" value="20+"><span data-i18n="ag3">Mais de 20 anos</span></label>
-              </div></div>
-              <div class="q"><p class="q-l" data-i18n="qNow">Quem administra hoje</p><div class="chips">
-                <label class="chip"><input type="radio" name="now" value="empresa"><span data-i18n="nw1">Uma empresa</span></label>
-                <label class="chip"><input type="radio" name="now" value="condominos"><span data-i18n="nw2">Os próprios condóminos</span></label>
-                <label class="chip"><input type="radio" name="now" value="novo"><span data-i18n="nw3">Ainda ninguém, edifício novo</span></label>
-              </div></div>
-              <div class="q"><p class="q-l" data-i18n="qVal">O que mais valorizam numa administração</p><div class="chips">
-                <label class="chip"><input type="checkbox" name="val" value="contas"><span data-i18n="vl1">Contas claras</span></label>
-                <label class="chip"><input type="checkbox" name="val" value="resposta"><span data-i18n="vl2">Resposta rápida</span></label>
-                <label class="chip"><input type="checkbox" name="val" value="obras"><span data-i18n="vl3">Acompanhamento de obras</span></label>
-                <label class="chip"><input type="checkbox" name="val" value="assembleias"><span data-i18n="vl4">Assembleias bem preparadas</span></label>
-                <label class="chip"><input type="checkbox" name="val" value="ingles"><span data-i18n="vl5">Atendimento em inglês</span></label>
-              </div></div>
-              <div class="q"><p class="q-l" data-i18n="qWorks">Há obras previstas ou urgentes?</p><div class="chips">
-                <label class="chip"><input type="radio" name="works" value="sim"><span data-i18n="yes">Sim</span></label>
-                <label class="chip"><input type="radio" name="works" value="nao"><span data-i18n="no">Não</span></label>
-                <label class="chip"><input type="radio" name="works" value="nao-sei"><span data-i18n="dk">Não sei</span></label>
-              </div></div>
-              <div class="q-row">
-                <div class="field"><label for="f-when" data-i18n="lWhen">Próxima assembleia ou fim do contrato atual</label><input id="f-when" name="when" type="date"></div>
-                <div class="field"><label for="f-lang" data-i18n="lLang">Língua preferida</label><select id="f-lang" name="lang"><option data-i18n="lgPT">Português</option><option data-i18n="lgEN">Inglês</option></select></div>
-              </div>
-              <div class="q"><p class="q-l" data-i18n="qHow">Como prefere ser contactado</p><div class="chips">
-                <label class="chip"><input type="radio" name="how" value="telefone"><span data-i18n="hw1">Telefone</span></label>
-                <label class="chip"><input type="radio" name="how" value="email"><span data-i18n="hw2">Email</span></label>
-                <label class="chip"><input type="radio" name="how" value="video"><span data-i18n="hw3">Videochamada</span></label>
-                <label class="chip"><input type="radio" name="slot" value="manha"><span data-i18n="sl1">De manhã</span></label>
-                <label class="chip"><input type="radio" name="slot" value="tarde"><span data-i18n="sl2">À tarde</span></label>
-              </div></div>
-            </fieldset>
-            <div class="field full"><label for="f-msg"><span data-i18n="lMsg">Mensagem</span> <span class="opt" data-only="proposta" data-i18n="opt">Opcional</span></label><textarea id="f-msg" name="message"></textarea></div>
+            <div class="field full"><label for="f-msg"><span data-i18n="lMsg">Mensagem</span> <span class="opt" data-i18n="opt">Opcional</span></label><textarea id="f-msg" name="message"></textarea></div>
             <label class="check full field" for="f-ok"><input id="f-ok" name="ok" type="checkbox"><span data-i18n="lOk">Aceito que os meus dados sejam usados para responder a este pedido, de acordo com a política de privacidade.</span></label>
             <div class="form-actions">
-              <button class="btn btn-band" type="submit"><span data-only="proposta" data-i18n="cta">Pedir proposta</span><span data-only="pergunta" data-i18n="sendQ" hidden>Enviar pergunta</span></button>
+              <button class="btn btn-band" type="submit" data-i18n="cta">Pedir proposta</button>
               <span class="form-msg" id="form-msg" role="status" aria-live="polite"></span>
             </div>
             <p class="demo-note full" style="grid-column:1/-1" data-i18n="formNote">Formulário de demonstração. Nada é enviado.</p>
           </form>
-          <dl class="details">
-            <div><dt data-i18n="dAddr">Escritório</dt><dd>Rua do Exemplo, 100, 4150-000 Porto<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-            <div><dt data-i18n="dPhone">Telefone</dt><dd>+351 220 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-            <div><dt data-i18n="dUrg">Urgências</dt><dd>+351 910 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-            <div><dt>Email</dt><dd>geral@<span class="nm-lower">ellum8</span>.exemplo<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-            <div><dt data-i18n="dHours">Horário</dt><dd data-i18n="hours">Dias úteis, das 9h00 às 18h30</dd></div>
-          </dl>
+          <div class="side">
+            <p class="call" data-i18n="callP">Prefere ligar? Fale diretamente connosco.</p>
+            <dl class="details">
+              <div><dt data-i18n="dPhone">Telefone</dt><dd>+351 220 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+              <div><dt data-i18n="dUrg2">Urgências fora de horas, depois das 17h</dt><dd>+351 910 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+              <div><dt>Email</dt><dd>geral@<span class="nm-lower">condigno</span>.exemplo<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+              <div><dt data-i18n="dHours">Horário</dt><dd data-i18n="hours">Dias úteis, das 9h00 às 17h00</dd></div>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
@@ -879,19 +798,19 @@ footer a:hover{color:var(--on-band)}
 <footer>
   <div class="wrap">
     <div style="display:grid;gap:10px">
-      <a class="brand nm" href="#inicio">ELLUM8</a>
+      <a class="brand nm" href="#inicio">CONDIGNO</a>
       <p class="motto" style="font-size:20px;color:var(--on-band-muted)" data-i18n="motto">Ligamos pessoas.<br>Cuidamos do património.</p>
     </div>
     <ul>
-      <li><span class="nm">ELLUM8</span> <span data-i18n="lineC">Condomínios</span></li>
-      <li data-linha="patrimonio" hidden><span class="nm">ELLUM8</span> <span data-i18n="lineP">Património</span></li>
-      <li>Porto · Vila Nova de Gaia</li>
+      <li><span class="nm">CONDIGNO</span> <span data-i18n="lineC">Condomínios</span></li>
+      <li data-linha="patrimonio" hidden><span class="nm">CONDIGNO</span> <span data-i18n="lineP">Património</span></li>
+      <li data-i18n="place">Grande Porto</li>
     </ul>
     <ul>
       <li><a href="#contacto" data-i18n="privacy">Política de privacidade</a></li>
       <li><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener" data-i18n="complaints">Livro de Reclamações</a></li>
     </ul>
-    <p class="foot-note"><span class="nm">ELLUM8</span>, Lda. · NIF 500 000 000 · <span data-i18n="footNote">Site de demonstração. Contactos, moradas e números são fictícios.</span></p>
+    <p class="foot-note"><span class="nm">CONDIGNO</span>, Lda. · NIF 500 000 000 · <span data-i18n="footNote">Site de demonstração. Contactos, moradas e números são fictícios.</span></p>
   </div>
 </footer>
 
@@ -909,8 +828,8 @@ footer a:hover{color:var(--on-band)}
 /* ===== Configuração =====
    Troque aqui o nome e ligue a linha de serviço "Património" quando existir. */
 const CONFIG = {
-  nome: "ELLUM8",
-  alternativas: ["ELLUM8", "CONDIGNO", "ELOVA", "VELIA"],
+  nome: "CONDIGNO",
+  alternativas: ["CONDIGNO", "ELLUM8", "ELOVA", "VELIA"],
   linhas: { condominios: true, patrimonio: false }
 };
 
@@ -919,7 +838,18 @@ const MARK = '<svg viewBox="0 0 120 76" fill="none" stroke="currentColor" stroke
 const hasMark = () => nome === "ELLUM8";
 
 const EN = {
-  formOkQ:"Thank you. We will reply the next working day. This is a demo, so nothing was sent.",
+  dUrg2:"Out-of-hours emergencies, after 5 pm",
+  zOther:"Other",
+  st5:"Text to be supplied by the partners",
+  st5t:"Plan for the first year",
+  tbc:"Wording to be confirmed",
+  feeCta:"We present a quote tailored to what each building needs.",
+  pledgeS:"One direct contact who follows day-to-day life in the building.",
+  callP:"Would you rather call? Talk to us directly.",
+  f2t:"Greater Porto",
+  pledge:"Every building has a manager who knows it.",
+  place:"Greater Porto",
+  formOkQ:"Thank you. We will reply within 48 hours. This is a demo, so nothing was sent.",
   sendQ:"Send question",
   sl2:"In the afternoon",
   sl1:"In the morning",
@@ -957,16 +887,13 @@ const EN = {
   ft1:"Lifts",
   qFeat:"Building features",
   opt:"Optional",
-  moreT:"Help us prepare the conversation",
+  moreT:"Help us prepare the meeting",
   u4:"More than 60",
   u3:"31 to 60",
   u2:"11 to 30",
   u1:"Up to 10",
-  zOther:"Elsewhere in Greater Porto",
-  zOtherG:"Another area of Gaia",
-  zOtherP:"Another area of Porto",
-  zSel:"Choose an area",
-  lZone:"Building area",
+  zSel:"Choose a municipality",
+  lZone:"Municipality",
   o6:"Investor with several units",
   o5:"Developer of a new building",
   lRole2:"Your connection to the building",
@@ -974,84 +901,67 @@ const EN = {
   modeQ:"Ask a question",
   modeP:"Request a proposal",
   modeL:"What would you like to do",
-  feeCta:"After a first conversation and a visit to the building, we send a proposal with the price, what is included and what falls outside the monthly fee.",
-  incL:"<li>Day-to-day management and insurance</li><li>Fee collection</li><li>Accounts and a monthly report with invoices</li><li>Annual owners' meeting and minutes</li><li>Quarterly technical visit</li><li>Small repairs through trusted partners</li><li>Emergency line</li>",
-  incT:"Included in the monthly fee",
-  facL:"<li>Number of units</li><li>Lifts and garage</li><li>Pool, gardens or concierge</li><li>Condition of the building</li>",
-  facT:"What changes the price",
-  feeP:"Our fee is a monthly amount per unit, tailored to what each building needs. In larger buildings the amount per unit is lower; in smaller buildings it is a little higher, so they get the same attention.",
-  feeT:"A quote tailored to each building",
-  feeL:"Fees",
   qA2:"James R., owner, Foz do Douro",
   qA1:"Ana M., owners' committee, Boavista",
-  q2:"They handled the whole switch of managers, and within the first month we had a three-year works plan. Every request gets an answer the same day.",
-  q1:"We receive the report with the invoices every month. At the last owners' meeting the accounts were approved in ten minutes, because everyone already knew them.",
+  q2:"They saw us through the whole switch of managers. From the start, there was always someone available.",
+  q1:"Whenever we have a question about the accounts, we get an answer. The last owners' meeting had no surprises.",
   qFic:"Fictitious testimonial",
-  zMore:"Have a building elsewhere in Greater Porto? Talk to us.",
-  nav1:"Services", nav6:"Fees", nav2:"Transparency", nav3:"Switching", nav4:"Area", nav5:"FAQ",
+  nav1:"Services", nav2:"Transparency", nav3:"Switching", nav5:"FAQ",
   cta:"Request a proposal", cta2:"How to switch managers",
   sub:"Condominium Management",
   motto:"Connecting people.<br>Caring for property.",
-  heroIntro:"We manage residential buildings in Porto and Vila Nova de Gaia. The accounts are open to every owner, every request gets an answer within one working day, and each building has a manager who knows it.",
-  commitT:"Commitments written into the contract", commitNote:"Draft commitments, to be confirmed",
-  c1t:"An account in the building's name", c1:"The money sits in a bank account in the condominium's name. The owners' committee can have view access.",
-  c2t:"A report every month", c2:"Income, expenses, overdue fees and the reserve fund, with invoices attached. Sent by the 10th.",
-  c3t:"An answer within one working day", c3:"Every request gets a reply the next working day and is followed through until it is resolved.",
-  c4t:"Works with compared proposals", c4:"Small repairs are handled through our network of trusted partners. For larger works we go to the market and present several proposals side by side.",
+  heroIntro:"We manage a group of residential buildings across Greater Porto. The accounts are clear and every building has a manager who knows it.",
+  commitT:"Our commitment",
   aboutL:"About us", aboutT:"Experience, close at hand",
-  about1:"We are two partners with more than 10 years of experience in the sector between us. Today we manage 8 buildings in Porto and Gaia.",
-  about2:"We know what owners value most: clear accounts, quick answers and well-managed works. We grow steadily and take on new buildings when we can give them the same attention as the ones we already manage.",
-  about3:"We work in Portuguese and English, from day-to-day contact to owners' meetings.",
-  f1:"years of experience in the sector", f2:"buildings managed in Porto and Gaia", f3:"service, reports and meetings in both languages",
-  servL:"Services", servT:"What we do", servP:"Everything a building needs day to day, with one team and one point of contact.",
-  s1t:"Building management", s1:"<li>Day-to-day management of common areas</li><li>Cleaning, lift and garden contracts, reviewed every year</li><li>Mandatory insurance and claims</li>",
-  s2t:"Finance and accounts", s2:"<li>Annual budget per unit, based on each unit's share</li><li>Fee collection and payment management</li><li>Reserve fund in a separate account and a monthly report</li>",
-  s3t:"Maintenance and works", s3:"<li>Technical visit to every building at least once a quarter</li><li>Small repairs handled through trusted partners</li><li>Market tender and comparison of proposals for larger works</li><li>Supervising works through handover and warranty</li>",
-  s4t:"Owners' meetings and minutes", s4:"<li>Notice of meeting with agenda and documents attached</li><li>Chairing the meeting, in person or by video call</li><li>Minutes sent to every owner within 10 days</li>",
-  s5t:"Legal support", s5:"<li>Recovery of overdue fees, favouring amicable solutions</li><li>Reviewing and updating the building rules</li><li>Support from partner lawyers who specialise in condominium law</li>",
-  valL:"Why us", valT:"Accounts any owner can read", valP:"Transparency is what owners value most in a manager. It is where we put the most care.",
-  v1l:"Transparency", v1t:"You always know what came in, what went out, and why",
-  v1a:"Every month each owner receives a report like this one, with the invoices attached. The figures come from the bank account in the condominium's name.",
-  v1b:"Every change is explained. Overdue fees and open requests are listed too, without naming owners.",
-  r0:"Monthly report · October 2026", rEx:"Sample figures", r1:"Example Building, Foz do Douro · 24 units",
+  about1:"A newly founded company, built on the team's solid experience in condominium management.",
+  about2:"We manage a group of buildings across Greater Porto and grow steadily.",
+  f1:"years of the team's experience", f2:"where we work", f3:"service and owners' meetings in both languages",
+  servL:"Services", servT:"What we do", servP:"Everything a building needs day to day, with a dedicated manager and a network of trusted partners.",
+  s1t:"Dedicated manager", s1:"One direct contact who knows the building.",
+  s3t:"Maintenance and works", s3:"Small repairs through partners and a market tender for larger works.",
+  s4t:"Flexible owners' meetings", s4:"In person or by video call, in Portuguese or English.",
+  s5t:"Trusted partners", s5:"Cleaning and technical maintenance. We work with partners for legal support.",
+  valL:"Transparency", valT:"Clear accounts and availability", valP:"Transparency is what owners value most in a manager. It is where we put the most care.",
+  v1l:"How we handle the money", v1t:"In a bank account in the condominium's name.",
+  v1a:"All year round we are available to answer any question about how your building is managed.",
+  v1b:"Anyone who asks receives a quarterly statement, like this example.",
+  r0:"Quarterly statement · Q3 2026", rEx:"Sample figures", r1:"Example Building, Foz do Douro · 24 units · July to September",
   rRec:"Income", rDesp:"Expenses",
-  r2:"Fees issued", r3:"Fees collected", r4:"Cleaning of common areas", r5:"Electricity, common areas", r6:"Lift maintenance", r7:"Building insurance (1/12)", r8:"Management fee", r9:"Stairwell painting (instalment 2 of 3)", r10:"Total expenses", r11:"Transfer to the reserve fund", r12:"Result for the month",
+  r2:"Fees issued", r3:"Fees collected", r4:"Cleaning of common areas", r5:"Electricity, common areas", r6:"Lift maintenance", r7:"Building insurance (3/12)", r8:"Management fee", r9:"Stairwell painting (3 instalments)", r10:"Total expenses", r11:"Transfer to the reserve fund", r12:"Result for the quarter",
   r13:"Current account balance", r14:"Reserve fund",
-  r15:"Overdue fees: 2 units, €240.00. Reminder sent on 5 October.", r16:"Owner requests: 7 received, 7 answered within one working day.", r17:"Attachments: 6 invoices (PDF).",
-  v2l:"Competence", v2:"We know Portuguese condominium law, the local partners and the needs of each kind of building, from an old townhouse in the Baixa to a new block with a garage and pool.",
-  v3l:"Standards", v3:"Quality buildings need quality partners and attention to detail: well-kept entrances, tended gardens, common areas that add to the property's value.",
-  v4l:"Rigour", v4:"Deadlines met, owners' decisions carried out and recorded, documents kept and available when asked for.",
-  stepL:"How we work", stepT:"How to switch managers", stepP:"It is a simple process. We handle the paperwork and day-to-day life in the building carries on as normal.",
-  st1t:"Conversation and building visit", st1:"We listen to the committee or the owners involved and visit the common areas. The visit is free.",
-  st2t:"Written proposal", st2:"The price per unit, what is included and our service commitments.",
-  st3t:"Decision at the owners' meeting", st3:"The owners' meeting approves the new manager. We help prepare the notice and the agenda.",
-  st4t:"Handover", st4:"We request all records from the previous manager: minutes, accounts, contracts, policies and keys. We check everything and send you a summary of what we received.",
-  st5t:"First report and a plan for the year", st5:"In the first month you receive the state of the accounts and a maintenance plan with priorities and estimated costs.",
-  zoneL:"Where we work", zoneT:"Porto and Vila Nova de Gaia", zoneP:"We focus on the two banks of the Douro, close to the buildings we manage. We can reach any of them in under 30 minutes.", zBaixa:"Baixa (city centre)",
+  r15:"Overdue fees: 1 unit, €120.00.", r16:"Owner requests this quarter: 18 received, 17 resolved, 1 in progress.", r17:"Attachments: 19 invoices (PDF).",
+  v2l:"Competence", v2:"We know the law and the needs of each kind of building.",
+  v3l:"Standards", v3:"Attention to detail in the common areas, which add to the property's value.",
+  v4l:"Rigour", v4:"Decisions of the owners' meeting carried out and recorded in the minutes.",
+  stepL:"How we work", stepT:"How to switch managers", stepP:"We work with buildings of any size.",
+  st1t:"Meeting", st1:"A meeting with the committee or the owners, and a visit to the building if needed.",
+  st2t:"Proposal", st2:"The proposal sets out what we do and the value we add.",
+  st3t:"Decision at the owners' meeting", st3:"The owners' meeting approves the new manager.",
+  st4t:"Handover", st4:"We validate the handover, confirm access to the bank account and tell the suppliers about the change.",
   qL:"Clients", qT:"What owners say",
   faqL:"FAQ", faqT:"Before you decide",
-  fq1:"How much does it cost?", fa1:"We charge a monthly amount per unit. The amount per unit goes down as the number of units goes up, and it reflects the building, such as lifts, a garage or a pool. After the visit we send a proposal with the price, what is included and what falls outside the monthly fee.",
-  fq2:"Can we switch managers mid-term?", fa2:"The owners' meeting can elect a new manager. We explain the steps and help prepare the notice and the agenda.",
-  fq3:"What happens to the previous manager's records?", fa3:"The outgoing manager hands over all of the condominium's records. We make the request, receive the documents and keep an inventory of everything received.",
-  fq4:"How do I follow my building's accounts?", fa4:"Every month you receive the income and expenses report by email, with invoices attached. You can ask for any other document and we send it the next working day.",
-  fq5:"Which languages do you work in?", fa5:"Portuguese and English: day-to-day contact, reports and owners' meetings. Anyone who cannot attend in person can join meetings by video conference.",
+  fq1:"How much does it cost?", fa1:"After a meeting, we present a quote tailored to what the building needs.",
+  fq2:"Can we switch managers mid-term?", fa2:"Yes. The switch is decided by the owners' meeting and we stay with you throughout.",
+  fq3:"What happens to the previous manager's records?", fa3:"The outgoing manager hands over all of the condominium's records. We validate the handover and keep an inventory of everything received.",
+  fq4:"How do I follow my building's accounts?", fa4:"We are available all year round to answer any question. You can also ask for a quarterly statement.",
+  fq5:"Which languages do you work in?", fa5:"Portuguese and English, including at owners' meetings.",
   fq6:"What is the reserve fund?", fa6:"It is money set aside for maintenance works on the common areas. Each owner contributes at least 10% of their fee. We keep it in a separate account and the balance appears in every report.",
-  fq7:"Is there support out of hours?", fa7:"Yes, we have an emergency line out of hours. We contact the right partner straight away and tell the owners what was done.",
-  fq8:"Do you also manage individual properties?", fa8:"Yes, we can. We manage individual properties for owners, from lettings to maintenance, in a service that will have its own brand: {N} Património.",
+  fq7:"Is there support out of hours?", fa7:"Yes. After 5 pm we have an emergency number.",
+  fq8:"Do you also manage individual properties?", fa8:"Yes, we can, in a separate service: {N} Património.",
   futP:"Property management for owners who prefer to delegate the day to day: lettings, maintenance, taxes and accounts, with the same monthly report.",
-  ctL:"Contact", ctT:"Talk to us", ctP:"Tell us a little about the building. We will call you the next working day to arrange a conversation and a visit.",
+  ctL:"Contact", ctT:"Talk to us", ctP:"We will get in touch within 48 hours to arrange a meeting and, if needed, a visit to the building.",
   lName:"Name", lEmail:"Email", o1:"An owner", o2:"A member of the owners' committee", o3:"The current manager", o4:"Other", lUnits:"Number of units", lMsg:"Message",
   lOk:"I agree that my details may be used to reply to this request, in line with the privacy policy.", formNote:"Demo form. Nothing is sent.",
-  dAddr:"Office", dPhone:"Phone", dUrg:"Emergencies", dHours:"Hours", hours:"Working days, 9:00 to 18:30", ex:"sample",
+  dAddr:"Office", dPhone:"Phone", dUrg:"Emergencies", dHours:"Hours", hours:"Working days, 9:00 to 17:00", ex:"sample",
   lineC:"Condomínios", lineP:"Património",
   privacy:"Privacy policy", complaints:"Complaints Book (Livro de Reclamações)",
   footNote:"Demo website. Contacts, addresses and numbers are fictitious.",
   sw:"Name", sw2:"Version", swBB:"Brand",
-  formOk:"Thank you. We will call you the next working day to arrange a visit to the building. This is a demo, so nothing was sent.", formErr:"Some details are missing. Please check the highlighted fields."
+  formOk:"Thank you. We will prepare for the conversation and get in touch within 48 hours. This is a demo, so nothing was sent.", formErr:"Some details are missing. Please check the highlighted fields."
 };
 const PT_EXTRA = {
-  formOk:"Obrigado. Ligamos-lhe no dia útil seguinte para marcar a visita ao edifício. Isto é uma demonstração, por isso nada foi enviado.",
-  formOkQ:"Obrigado. Respondemos no dia útil seguinte. Isto é uma demonstração, por isso nada foi enviado.",
+  formOk:"Obrigado. Vamos preparar a conversa e entramos em contacto em 48 horas. Isto é uma demonstração, por isso nada foi enviado.",
+  formOkQ:"Obrigado. Respondemos em 48 horas. Isto é uma demonstração, por isso nada foi enviado.",
   formErr:"Faltam alguns dados. Verifique os campos assinalados."
 };
 
@@ -1137,36 +1047,27 @@ document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click
 }));
 
 const form = document.getElementById("form");
-function setMode(m){
-  form.querySelectorAll("[data-only]").forEach(el => { el.hidden = el.dataset.only !== m; });
-  const msg = document.getElementById("form-msg"); msg.textContent = ""; msg.classList.remove("err");
-  form.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
-}
-form.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener("change", () => setMode(form.mode.value)));
-document.querySelectorAll('a[href="#contacto"]').forEach(a => a.addEventListener("click", () => { form.querySelector("#m-prop").checked = true; setMode("proposta"); }));
 // Demonstração: valida no navegador e mostra a confirmação. Nada é enviado.
 form.addEventListener("submit", e => {
   e.preventDefault();
-  const f = form, mode = f.mode.value, msg = document.getElementById("form-msg");
+  const f = form, msg = document.getElementById("form-msg");
   f.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
   const bad = [];
   if (!f.name.value.trim()) bad.push(f.name);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) bad.push(f.email);
-  if (mode === "proposta") {
-    if (f.phone.value.replace(/\D/g, "").length < 9) bad.push(f.phone);
-    if (!f.zone.value) bad.push(f.zone);
-    if (!f.querySelector('input[name="units"]:checked')) bad.push(document.getElementById("f-units"));
-  } else if (!f.message.value.trim()) bad.push(f.message);
+  if (f.phone.value.replace(/\D/g, "").length < 9) bad.push(f.phone);
+  if (!f.zone.value) bad.push(f.zone);
+  if (!f.querySelector('input[name="units"]:checked')) bad.push(document.getElementById("f-units"));
   if (!f.ok.checked) bad.push(f.ok);
   if (bad.length) {
     bad.forEach(el => el.setAttribute("aria-invalid", "true"));
     msg.textContent = t("formErr").replace(/<[^>]+>/g, ""); msg.classList.add("err");
-    const first = bad[0].tagName === "FIELDSET" ? bad[0].querySelector("input") : bad[0];
-    first.focus();
+    (bad[0].tagName === "FIELDSET" ? bad[0].querySelector("input") : bad[0]).focus();
     return;
   }
-  f.reset(); setMode("proposta");
-  msg.textContent = t(mode === "proposta" ? "formOk" : "formOkQ").replace(/<[^>]+>/g, "");
+  msg.classList.remove("err");
+  f.reset();
+  msg.textContent = t("formOk").replace(/<[^>]+>/g, "");
 });
 
 // ===== Manual de identidade =====
@@ -1199,7 +1100,7 @@ const BRAND = {
     type:[
       {role:"Nome e títulos",fam:"Cormorant Garamond",w:"Pesos 500 e 600",why:"Serifa clássica de alto contraste. Transmite tradição, cuidado e permanência.",fb:"Word e email: Garamond ou Georgia.",cls:"s-display",txt:"Contas que qualquer condómino consegue ler"},
       {role:"Mote e citações",fam:"Cormorant Garamond itálico",w:"Pesos 400 e 500",why:"O itálico dá ao mote um tom pessoal, próximo de uma frase escrita à mão.",fb:"Word e email: Georgia itálico.",cls:"s-italic",txt:"Ligamos pessoas. Cuidamos do património."},
-      {role:"Texto, etiquetas e formulários",fam:"Hanken Grotesk",w:"Pesos 400, 500 e 600",why:"Sem serifa clara e legível em ecrã, mesmo em tamanhos pequenos. Equilibra a serifa dos títulos.",fb:"Word e email: Arial ou Calibri.",cls:"s-body",txt:"Todos os meses cada condómino recebe o relatório de receitas e despesas, com as faturas anexas."}]
+      {role:"Texto, etiquetas e formulários",fam:"Hanken Grotesk",w:"Pesos 400, 500 e 600",why:"Sem serifa clara e legível em ecrã, mesmo em tamanhos pequenos. Equilibra a serifa dos títulos.",fb:"Word e email: Arial ou Calibri.",cls:"s-body",txt:"Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida."}]
   },
   b:{ title:"Versão B · Granito e azul do Douro",
     intro:"Contemporânea e clara. Proposta feita sem paleta de partida, a partir do Porto e do argumento principal da empresa: contas transparentes.",
@@ -1215,7 +1116,7 @@ const BRAND = {
     type:[
       {role:"Nome e títulos",fam:"Schibsted Grotesk",w:"Pesos 600 e 700",why:"Grotesca contemporânea, firme e compacta. Lê-se bem em tamanhos grandes e dá um tom atual e direto.",fb:"Word e email: Arial em negrito ou Segoe UI Semibold.",cls:"s-display",txt:"Contas que qualquer condómino consegue ler"},
       {role:"Mote",fam:"Schibsted Grotesk itálico",w:"Peso 500",why:"O mesmo tipo de letra em itálico mantém o mote dentro da família, sem mudar de tom.",fb:"Word e email: Arial itálico.",cls:"s-italic",txt:"Ligamos pessoas. Cuidamos do património."},
-      {role:"Texto, etiquetas e formulários",fam:"IBM Plex Sans",w:"Pesos 400, 500 e 600",why:"Humanista, desenhada para documentos técnicos. Os algarismos são muito claros, o que ajuda nos relatórios.",fb:"Word e email: Arial ou Segoe UI.",cls:"s-body",txt:"Todos os meses cada condómino recebe o relatório de receitas e despesas, com as faturas anexas."}]
+      {role:"Texto, etiquetas e formulários",fam:"IBM Plex Sans",w:"Pesos 400, 500 e 600",why:"Humanista, desenhada para documentos técnicos. Os algarismos são muito claros, o que ajuda nos relatórios.",fb:"Word e email: Arial ou Segoe UI.",cls:"s-body",txt:"Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida."}]
   }
 };
 function hexRgb(h){ h=h.replace("#",""); return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16)); }
@@ -1276,20 +1177,23 @@ function renderBrand(){
       <div><small>Nome · 92 px</small><span class="x" style="font-family:var(--display);font-size:44px;line-height:1.1;font-weight:600">${nome}</span></div>
       <div><small>Título · 46 px</small><span class="x" style="font-family:var(--display);font-size:32px;font-weight:600">Como mudar de administração</span></div>
       <div><small>Subtítulo · 24 px</small><span class="x" style="font-family:var(--display);font-size:24px;font-weight:600">Proposta escrita</span></div>
-      <div><small>Texto · 17 px</small><span class="x" style="font-family:var(--body);font-size:17px">Preço fixo mensal, o que está incluído e os compromissos de serviço.</span></div>
-      <div><small>Etiqueta · 12,5 px</small><span class="x label">Compromissos escritos no contrato</span></div>
+      <div><small>Texto · 17 px</small><span class="x" style="font-family:var(--body);font-size:17px">Um orçamento à medida de cada condomínio.</span></div>
+      <div><small>Etiqueta · 12,5 px</small><span class="x label">Cada edifício tem um gestor</span></div>
     </div>`);
 
   const voiceSec = sec("5. Tom de voz", "Igual nas duas versões. Tirado dos comentários dos sócios ao site.", `
     <div class="principles">
-      <div><b>Direto e concreto</b><span>Números, prazos e passos reais. Frases curtas, sem travessões nem frases de efeito.</span></div>
+      <div><b>Direto e concreto</b><span>Números e passos reais, e só prometer o que conseguimos cumprir. Frases curtas, sem travessões nem frases de efeito.</span></div>
       <div><b>Próximo e humano</b><span>Falar com o condómino, na terceira pessoa e sem "você" explícito, como em "Diga-nos onde fica o edifício".</span></div>
       <div><b>Positivo</b><span>Dizer o que fazemos, não o que os outros fazem mal. Responder "sim, também é possível" em vez de "para já não".</span></div>
       <div><b>Para todos</b><span>Português e inglês ao mesmo nível, sem distinguir clientes por nacionalidade ou residência.</span></div>
     </div>
     <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Usar</th><th>Evitar</th></tr></thead><tbody>
       <tr><td>parceiro</td><td>fornecedor</td></tr>
-      <tr><td>num dia útil</td><td>em 1 dia útil, em um dia útil</td></tr>
+      <tr><td>disponíveis todo o ano para esclarecer dúvidas</td><td>resposta garantida num dia útil</td></tr>
+      <tr><td>reunião e eventual visita ao edifício</td><td>conversa e visita</td></tr>
+      <tr><td>ata da assembleia</td><td>contrato</td></tr>
+      <tr><td>orçamento à medida de cada condomínio</td><td>preço por fração</td></tr>
       <tr><td>crescemos de forma sustentada</td><td>crescemos devagar, somos pequenos</td></tr>
       <tr><td>recuperação de quotas, soluções amigáveis</td><td>dívidas, tribunal</td></tr>
       <tr><td>trabalhamos em português e em inglês</td><td>clientes estrangeiros, quem não vive em Portugal</td></tr>
@@ -1305,8 +1209,8 @@ function renderBrand(){
           <div class="bcard back"><div class="who"><b>[Nome Apelido]</b><span>Sócio-gerente</span></div><div></div><div><div class="ct">+351 220 000 000<br>nome@${nome.toLowerCase()}.exemplo<br>Rua do Exemplo, 100 · 4150-000 Porto</div><div class="mt">Ligamos pessoas. Cuidamos do património.</div></div></div>
         </div></div>
       <div><div class="app-h"><b>Assinatura de email</b><span>Usa Georgia e Arial, porque a maioria dos programas de email não carrega fontes da web.</span></div>
-        <div class="mail"><div class="mail-h"><span>Para: comissao@edificio.exemplo</span><span>Assunto: Relatório mensal de outubro</span></div>
-          <div class="mail-b"><p>Bom dia,</p><p>Segue em anexo o relatório de outubro, com as seis faturas do mês. Qualquer dúvida, estamos ao dispor.</p><p>Com os melhores cumprimentos,</p>
+        <div class="mail"><div class="mail-h"><span>Para: comissao@edificio.exemplo</span><span>Assunto: Extrato do 3.º trimestre</span></div>
+          <div class="mail-b"><p>Bom dia,</p><p>Conforme pedido, segue em anexo o extrato do 3.º trimestre, com as faturas do período. Qualquer dúvida, estamos ao dispor.</p><p>Com os melhores cumprimentos,</p>
             <div class="sig"><div class="wm">${nome}<small>CONDOMÍNIOS</small></div><div class="lines"><b>[Nome Apelido]</b> · Sócio-gerente<br>+351 220 000 000 · nome@${nome.toLowerCase()}.exemplo<br><i>Ligamos pessoas. Cuidamos do património.</i></div></div>
           </div></div></div>
       <div><div class="app-h"><b>Placa à porta</b><span>Latão escovado ou impressão sobre verde, com moldura dourada. Também serve de modelo para a placa de cada edifício administrado.</span></div>
@@ -1339,7 +1243,6 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(fals
 applyLines();
 applyVersion();
 applyLang();
-setMode("proposta");
 if (location.hash === "#identidade") setBrand(true);
 </script>
 
