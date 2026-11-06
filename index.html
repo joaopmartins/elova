@@ -637,7 +637,6 @@ footer a:hover{color:var(--on-band)}
             <p class="label" data-i18n="v1l">Como gerimos o dinheiro</p>
             <h3 data-i18n="v1t">Numa conta bancária em nome do condomínio.</h3>
             <p data-i18n="v1a">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida sobre a gestão do seu condomínio.</p>
-            <p data-i18n="v1b">Quem o pedir recebe um extrato trimestral, como este exemplo.</p>
           </div>
           <figure class="report" style="margin:0" aria-label="Exemplo de extrato trimestral">
             <div class="report-head">
@@ -696,7 +695,7 @@ footer a:hover{color:var(--on-band)}
           <li><h3 data-i18n="st2t">Proposta</h3><p data-i18n="st2">A proposta descreve o que fazemos e o valor que acrescentamos.</p></li>
           <li><h3 data-i18n="st3t">Decisão em assembleia</h3><p data-i18n="st3">A assembleia de condóminos aprova a nova administração.</p></li>
           <li><h3 data-i18n="st4t">Passagem de pasta</h3><p data-i18n="st4">Validamos a passagem de pasta, confirmamos o acesso à conta bancária e comunicamos a mudança aos fornecedores.</p></li>
-          <li><h3 data-i18n="st5t">Plano para o primeiro ano</h3><p><span class="demo-note" data-i18n="st5">Texto a enviar pelos sócios</span></p></li>
+          <li><h3 data-i18n="st5t">Plano para o primeiro ano</h3><p data-i18n="st5">Identificamos as prioridades do edifício e propomos à assembleia um plano para o primeiro ano.</p></li>
         </ol>
       </div>
     </div>
@@ -727,10 +726,8 @@ footer a:hover{color:var(--on-band)}
         <div class="faq">
           <details><summary data-i18n="fq1">Quanto custa?</summary><p data-i18n="fa1">Depois de uma reunião, apresentamos um orçamento ajustado às necessidades do condomínio.</p></details>
           <details><summary data-i18n="fq2">Podemos mudar de administração a meio do mandato?</summary><p data-i18n="fa2">Sim. A mudança é decidida pela assembleia de condóminos e acompanhamos todo o processo.</p></details>
-          <details><summary data-i18n="fq4">Como acompanho as contas do meu condomínio?</summary><p data-i18n="fa4">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida. Também pode pedir um extrato trimestral.</p></details>
-          <details><summary data-i18n="fq5">Em que línguas trabalham?</summary><p data-i18n="fa5">Em português e em inglês, incluindo nas assembleias.</p></details>
-          <details><summary data-i18n="fq7">Há apoio fora do horário de expediente?</summary><p data-i18n="fa7">Sim. Depois das 17h, temos um número para urgências.</p></details>
-          <details><summary data-i18n="fq8">Fazem também gestão de imóveis?</summary><p data-i18n="fa8">Sim, também é possível, numa área própria: <span class="nm">CONDIGNO</span> Património.</p></details>
+          <details><summary data-i18n="fq4">Como acompanho as contas do meu condomínio?</summary><p data-i18n="fa4">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida.</p></details>
+          <details><summary data-i18n="fq7">Há apoio fora do horário de expediente?</summary><p data-i18n="fa7">Sim. Temos um contacto para urgências fora do horário de expediente.</p></details>
         </div>
       </div>
     </div>
@@ -748,7 +745,7 @@ footer a:hover{color:var(--on-band)}
       <div class="sec-head">
         <p class="label" data-i18n="ctL">Contacto</p>
         <h2 id="ct-t" data-i18n="ctT">Fale connosco</h2>
-        <p data-i18n="ctP">Entramos em contacto em 48 horas para marcar uma reunião e uma eventual visita ao edifício.</p>
+        <p data-i18n="ctP">Entramos em contacto consigo com a maior brevidade possível, para marcar uma reunião e uma eventual visita ao edifício.</p>
       </div>
       <div class="sec-body">
         <div class="contact">
@@ -784,9 +781,9 @@ footer a:hover{color:var(--on-band)}
             <p class="call" data-i18n="callP">Prefere ligar? Fale diretamente connosco.</p>
             <dl class="details">
               <div><dt data-i18n="dPhone">Telefone</dt><dd>+351 220 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-              <div><dt data-i18n="dUrg2">Urgências fora de horas, depois das 17h</dt><dd>+351 910 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
+              <div><dt data-i18n="dUrg2">Urgências fora do horário de expediente</dt><dd>+351 910 000 000<span class="ex" data-i18n="ex">exemplo</span></dd></div>
               <div><dt>Email</dt><dd>geral@<span class="nm-lower">condigno</span>.exemplo<span class="ex" data-i18n="ex">exemplo</span></dd></div>
-              <div><dt data-i18n="dHours">Horário</dt><dd data-i18n="hours">Dias úteis, das 9h00 às 17h00</dd></div>
+              <div><dt data-i18n="dHours">Horário</dt><dd data-i18n="hours">Dias úteis, das 9h00 às 18h00<span class="ex">exemplo</span></dd></div>
             </dl>
           </div>
         </div>
@@ -838,9 +835,9 @@ const MARK = '<svg viewBox="0 0 120 76" fill="none" stroke="currentColor" stroke
 const hasMark = () => nome === "ELLUM8";
 
 const EN = {
-  dUrg2:"Out-of-hours emergencies, after 5 pm",
+  dUrg2:"Emergencies outside office hours",
   zOther:"Other",
-  st5:"Text to be supplied by the partners",
+  st5:"We identify the building's priorities and propose a plan for the first year to the owners' meeting.",
   st5t:"Plan for the first year",
   tbc:"Wording to be confirmed",
   feeCta:"We present a quote tailored to what each building needs.",
@@ -849,7 +846,6 @@ const EN = {
   f2t:"Greater Porto",
   pledge:"Every building has a manager who knows it.",
   place:"Greater Porto",
-  formOkQ:"Thank you. We will reply within 48 hours. This is a demo, so nothing was sent.",
   sendQ:"Send question",
   sl2:"In the afternoon",
   sl1:"In the morning",
@@ -924,7 +920,6 @@ const EN = {
   valL:"Transparency", valT:"Clear accounts and availability", valP:"Transparency is what owners value most in a manager. It is where we put the most care.",
   v1l:"How we handle the money", v1t:"In a bank account in the condominium's name.",
   v1a:"All year round we are available to answer any question about how your building is managed.",
-  v1b:"Anyone who asks receives a quarterly statement, like this example.",
   r0:"Quarterly statement · Q3 2026", rEx:"Sample figures", r1:"Example Building, Foz do Douro · 24 units · July to September",
   rRec:"Income", rDesp:"Expenses",
   r2:"Fees issued", r3:"Fees collected", r4:"Cleaning of common areas", r5:"Electricity, common areas", r6:"Lift maintenance", r7:"Building insurance (3/12)", r8:"Management fee", r9:"Stairwell painting (3 instalments)", r10:"Total expenses", r11:"Transfer to the reserve fund", r12:"Result for the quarter",
@@ -943,25 +938,22 @@ const EN = {
   fq1:"How much does it cost?", fa1:"After a meeting, we present a quote tailored to what the building needs.",
   fq2:"Can we switch managers mid-term?", fa2:"Yes. The switch is decided by the owners' meeting and we stay with you throughout.",
   fq3:"What happens to the previous manager's records?", fa3:"The outgoing manager hands over all of the condominium's records. We validate the handover and keep an inventory of everything received.",
-  fq4:"How do I follow my building's accounts?", fa4:"We are available all year round to answer any question. You can also ask for a quarterly statement.",
-  fq5:"Which languages do you work in?", fa5:"Portuguese and English, including at owners' meetings.",
+  fq4:"How do I follow my building's accounts?", fa4:"We are available all year round to answer any question.",
   fq6:"What is the reserve fund?", fa6:"It is money set aside for maintenance works on the common areas. Each owner contributes at least 10% of their fee. We keep it in a separate account and the balance appears in every report.",
-  fq7:"Is there support out of hours?", fa7:"Yes. After 5 pm we have an emergency number.",
-  fq8:"Do you also manage individual properties?", fa8:"Yes, we can, in a separate service: {N} Património.",
+  fq7:"Is there support out of hours?", fa7:"Yes. We have an emergency contact outside office hours.",
   futP:"Property management for owners who prefer to delegate the day to day: lettings, maintenance, taxes and accounts, with the same monthly report.",
-  ctL:"Contact", ctT:"Talk to us", ctP:"We will get in touch within 48 hours to arrange a meeting and, if needed, a visit to the building.",
+  ctL:"Contact", ctT:"Talk to us", ctP:"We will get in touch as soon as possible to arrange a meeting and, if needed, a visit to the building.",
   lName:"Name", lEmail:"Email", o1:"An owner", o2:"A member of the owners' committee", o3:"The current manager", o4:"Other", lUnits:"Number of units", lMsg:"Message",
   lOk:"I agree that my details may be used to reply to this request, in line with the privacy policy.", formNote:"Demo form. Nothing is sent.",
-  dAddr:"Office", dPhone:"Phone", dUrg:"Emergencies", dHours:"Hours", hours:"Working days, 9:00 to 17:00", ex:"sample",
+  dAddr:"Office", dPhone:"Phone", dUrg:"Emergencies", dHours:"Hours", hours:"Working days, 9:00 to 18:00<span class=\"ex\">sample</span>", ex:"sample",
   lineC:"Condomínios", lineP:"Património",
   privacy:"Privacy policy", complaints:"Complaints Book (Livro de Reclamações)",
   footNote:"Demo website. Contacts, addresses and numbers are fictitious.",
   sw:"Name", sw2:"Version", swBB:"Brand",
-  formOk:"Thank you. We will prepare for the conversation and get in touch within 48 hours. This is a demo, so nothing was sent.", formErr:"Some details are missing. Please check the highlighted fields."
+  formOk:"Thank you. We will prepare for the conversation and get in touch as soon as possible. This is a demo, so nothing was sent.", formErr:"Some details are missing. Please check the highlighted fields."
 };
 const PT_EXTRA = {
-  formOk:"Obrigado. Vamos preparar a conversa e entramos em contacto em 48 horas. Isto é uma demonstração, por isso nada foi enviado.",
-  formOkQ:"Obrigado. Respondemos em 48 horas. Isto é uma demonstração, por isso nada foi enviado.",
+  formOk:"Obrigado. Vamos preparar a conversa e entramos em contacto consigo com a maior brevidade possível. Isto é uma demonstração, por isso nada foi enviado.",
   formErr:"Faltam alguns dados. Verifique os campos assinalados."
 };
 
