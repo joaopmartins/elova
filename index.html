@@ -324,6 +324,48 @@ fieldset[aria-invalid="true"] .chip{border-color:var(--neg)}
 @media (max-width: 1000px){ .svc{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width: 520px){ .svc{grid-template-columns:1fr} }
 
+/* Densidade: espaço proporcional ao conteúdo */
+section.sec > .wrap{padding-block:64px}
+.wide{row-gap:28px}
+.commit .wrap{padding-block:32px}
+.pledge-t{font-size:clamp(28px,3.6vw,44px)}
+.t-left{display:grid;gap:32px;align-content:start;min-width:0}
+.t-left .value-list{grid-template-columns:1fr;gap:16px;padding-top:24px}
+.t-left .value-list > div{grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:baseline}
+.transp{gap:48px}
+#testemunhos .sec-head{max-width:none}
+@media (max-width: 860px){ section.sec > .wrap{padding-block:48px} }
+@media (max-width: 520px){ .t-left .value-list > div{grid-template-columns:1fr;gap:4px} }
+
+/* Telemóvel: painel de demonstração recolhido, factos e passos compactos */
+.sw-toggle{display:none}
+@media (max-width: 600px){
+  .switcher:not(.open){padding:0;background:none;border:0;box-shadow:none}
+  .switcher{max-width:calc(100vw - 32px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px))}
+  .switcher .sw-toggle{box-shadow:0 8px 20px -8px rgba(0,0,0,.45)}
+  .switcher .sw-group,.switcher .sw-sep{display:none}
+  .switcher .sw-toggle{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;background:var(--fg);border-color:var(--fg);color:var(--bg);border-radius:999px;letter-spacing:.06em}
+  .switcher .sw-toggle::after{content:"+";font-size:16px;line-height:1}
+  .switcher.open{padding:10px;border-radius:8px;flex-direction:column;align-items:stretch;gap:10px;background:var(--surface);border:1px solid var(--line);box-shadow:0 10px 30px -12px rgba(0,0,0,.35)}
+  .switcher.open .sw-group{display:flex;flex-wrap:wrap}
+  .switcher.open .sw-label{display:inline;min-width:56px}
+  .switcher.open .sw-toggle{align-self:flex-end}
+  .switcher.open .sw-toggle::after{content:"\00D7"}
+}
+@media (max-width: 620px){
+  .facts{gap:12px}
+  .facts div{grid-template-columns:150px minmax(0,1fr);align-items:baseline;gap:12px}
+  .facts dt{font-size:24px}
+}
+@media (max-width: 520px){
+  .steps li{grid-template-columns:32px minmax(0,1fr);gap:4px 12px;padding-block:16px}
+  .steps li::before{font-size:30px}
+  .hero .wrap{padding-block:32px 40px;gap:28px}
+  .hero-copy{gap:20px}
+  .hero-intro{font-size:17px}
+  .chip{padding:8px 12px}
+}
+
 /* Símbolo ELLUM8 e algarismos alinhados no nome */
 .nm,.brand,.bb-logo .w,.plaque h1,.sig .wm{font-variant-numeric:lining-nums}
 .mark{display:block;color:var(--plaque-gold);line-height:0}
@@ -633,10 +675,17 @@ footer a:hover{color:var(--on-band)}
       </div>
       <div class="sec-body">
         <div class="transp">
-          <div class="prose">
-            <p class="label" data-i18n="v1l">Como gerimos o dinheiro</p>
-            <h3 data-i18n="v1t">Numa conta bancária em nome do condomínio.</h3>
-            <p data-i18n="v1a">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida sobre a gestão do seu condomínio.</p>
+          <div class="t-left">
+            <div class="prose">
+              <p class="label" data-i18n="v1l">Como gerimos o dinheiro</p>
+              <h3 data-i18n="v1t">Numa conta bancária em nome do condomínio.</h3>
+              <p data-i18n="v1a">Estamos disponíveis durante todo o ano para esclarecer qualquer dúvida sobre a gestão do seu condomínio.</p>
+            </div>
+          <div class="value-list">
+            <div><p class="label" data-i18n="v2l">Competência</p><p data-i18n="v2">Conhecemos a lei e as necessidades de cada tipo de edifício.</p></div>
+            <div><p class="label" data-i18n="v3l">Nível</p><p data-i18n="v3">Atenção ao pormenor nas partes comuns, que valorizam o imóvel.</p></div>
+            <div><p class="label" data-i18n="v4l">Rigor</p><p data-i18n="v4">Decisões da assembleia executadas e registadas em ata.</p></div>
+          </div>
           </div>
           <figure class="report" style="margin:0" aria-label="Exemplo de extrato trimestral">
             <div class="report-head">
@@ -672,11 +721,6 @@ footer a:hover{color:var(--on-band)}
             </div>
           </figure>
         </div>
-        <div class="value-list">
-          <div><p class="label" data-i18n="v2l">Competência</p><p data-i18n="v2">Conhecemos a lei e as necessidades de cada tipo de edifício.</p></div>
-          <div><p class="label" data-i18n="v3l">Nível</p><p data-i18n="v3">Atenção ao pormenor nas partes comuns, que valorizam o imóvel.</p></div>
-          <div><p class="label" data-i18n="v4l">Rigor</p><p data-i18n="v4">Decisões da assembleia executadas e registadas em ata.</p></div>
-        </div>
       </div>
     </div>
   </section>
@@ -702,7 +746,7 @@ footer a:hover{color:var(--on-band)}
   </section>
 
   <section class="sec" id="testemunhos" aria-labelledby="quote-t">
-    <div class="wrap">
+    <div class="wrap wide">
       <div class="sec-head">
         <p class="label" data-i18n="qL">Clientes</p>
         <h2 id="quote-t" data-i18n="qT">O que dizem os condóminos</h2>
@@ -812,6 +856,7 @@ footer a:hover{color:var(--on-band)}
 </footer>
 
 <div class="switcher" aria-label="Demonstração">
+  <button type="button" class="sw-toggle" aria-expanded="false" data-i18n="swT">Comparar</button>
   <div class="sw-group" role="group" aria-label="Versão visual"><span class="sw-label" data-i18n="sw2">Versão</span></div>
   <div class="sw-sep" aria-hidden="true"></div>
   <div class="sw-group" role="group" aria-label="Comparar nome"><span class="sw-label" data-i18n="sw">Nome</span></div>
@@ -949,7 +994,7 @@ const EN = {
   lineC:"Condomínios", lineP:"Património",
   privacy:"Privacy policy", complaints:"Complaints Book (Livro de Reclamações)",
   footNote:"Demo website. Contacts, addresses and numbers are fictitious.",
-  sw:"Name", sw2:"Version", swBB:"Brand",
+  sw:"Name", sw2:"Version", swT:"Compare", swBB:"Brand",
   formOk:"Thank you. We will prepare for the conversation and get in touch as soon as possible. This is a demo, so nothing was sent.", formErr:"Some details are missing. Please check the highlighted fields."
 };
 const PT_EXTRA = {
@@ -1224,6 +1269,10 @@ function setBrand(open){
 }
 document.querySelector(".sw-bb").addEventListener("click", () => setBrand(document.getElementById("identidade").hidden));
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !document.getElementById("identidade").hidden) setBrand(false); });
+
+// Painel de demonstração recolhido no telemóvel
+const swBox = document.querySelector(".switcher"), swToggle = document.querySelector(".sw-toggle");
+swToggle.addEventListener("click", () => { const o = !swBox.classList.contains("open"); swBox.classList.toggle("open", o); swToggle.setAttribute("aria-expanded", String(o)); });
 
 // Menu em ecrãs pequenos
 const topBar = document.querySelector(".top"), menuBtn = document.querySelector(".menu-btn");
